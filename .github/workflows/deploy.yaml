@@ -1,5 +1,4 @@
-name: Build and Deploy to Firebase PROD
-
+name: Build and Deploy
 on:
   push:
     branches:
@@ -7,20 +6,35 @@ on:
 
 jobs:
   build:
-    name: Build and Deploy
+    name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Repo
         uses: actions/checkout@master
-      - name: Initialize Node
-        uses: actions/setup-node@master
       - name: Install Dependencies
-        run: npm clean-install
+        run: npm install
       - name: Build
-        run: npm run build --prod
-      - name: Deploy
+        run: npm run build-prod
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: dist
+          path: dist
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Download Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: dist
+          path: dist
+      - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting:talkaboat-hosting --project=enodi-bc
+          args: deploy --only hosting:talkaboat-hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
