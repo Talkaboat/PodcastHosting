@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import '~ngx-toastr/toastr';
+
+html, body {
+  height:100%;
+  font-size: 16px;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  scroll-behavior: smooth !important;
+  @apply ease-in-out duration-500 transition-all;
+}
+
+::-webkit-scrollbar {
+  width: 7.5px;
+  background-color: #64A4FD;
+}
+::-webkit-scrollbar-track {
+  background-color: #13252570;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #64A4FD;
+  border: 1px solid transparent;
+  background-clip: content-box;
+  padding-left: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4b79a194;
+}
+
+.owl-theme .owl-nav [class*=owl-] {
+  min-width: 30px;
+  min-height: 30px;
+  margin: 10px !important;
+  font-size: 1rem !important;
+  background-color: #64A4FD !important;
+}
+
+.hover-up {
+  @apply relative top-0 hover:top-[-0.3rem] transition-all duration-700;
+}

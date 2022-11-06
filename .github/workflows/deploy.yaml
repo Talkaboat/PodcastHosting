@@ -1,0 +1,26 @@
+name: Build and Deploy to Firebase PROD
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Initialize Node
+        uses: actions/setup-node@master
+      - name: Install Dependencies
+        run: npm clean-install
+      - name: Build
+        run: npm run build --prod
+      - name: Deploy
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting:talkaboat-hosting --project=enodi-bc
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

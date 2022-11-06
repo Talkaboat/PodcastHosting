@@ -1,0 +1,33 @@
+.hidden {
+    visibility: hidden;
+}
+.loader-overlay {
+    position: fixed;
+    width: 500px;
+    height: 300px;
+    top: 50%;
+    left: 0;
+    right: 0;
+
+    z-index: 5000;
+    text-align: center;
+    margin-top: -250px;
+}
+
+.loader-background {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    @media screen and (max-width: 475px) {
+      left: 35%;
+    }
+    left: 50%;
+    top: 10px;
+    margin-left: -150px;
+    border-radius: 50%;
+}
+.gif {
+
+    border-radius: 50%;
+    opacity: 0.9;
+}
