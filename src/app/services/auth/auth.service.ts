@@ -15,6 +15,11 @@ import { Auth } from '@angular/fire/auth';
   providedIn: 'root',
 })
 export class AuthService {
+  logout() {
+    localStorage.setItem(this.tokenAccessIdentifier, '');
+    localStorage.setItem('social_login', 'false');
+    this.auth.signOut();
+  }
   user: any;
   private connectSub: Subscription = new Subscription();
   private _token: string | null = null;
@@ -127,7 +132,8 @@ export class AuthService {
     if (getAuth().currentUser) {
       return;
     }
-    const provider = new OAuthProvider("com.apple");
+    const provider = new OAuthProvider("apple.com");
+    provider.addScope('email');
     this.loadingService.show();
     signInWithPopup(this.auth, provider).then(result => {
       console.log(result);
