@@ -14,6 +14,8 @@ import { provideFirebaseApp } from '@angular/fire/app';
 import { initializeApp } from 'firebase/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getAnalytics, provideAnalytics, ScreenTrackingService } from '@angular/fire/analytics';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { getAnalytics, provideAnalytics, ScreenTrackingService } from '@angular/
     AppRoutingModule,
     DefaultModule,
     HttpClientModule,
+    MatButtonModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
@@ -34,6 +37,7 @@ import { getAnalytics, provideAnalytics, ScreenTrackingService } from '@angular/
       progressBar: true,
       progressAnimation: 'increasing'
     }),
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
