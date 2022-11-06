@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "site": "talkaboat-hosting",
-    "public": "public",
+    "target": "talkaboat_hosting",
+    "public": "dist/talkaboat_hosting",
     "ignore": [
       "firebase.json",
       "**/.*",

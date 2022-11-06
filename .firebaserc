@@ -1,4 +1,13 @@
 {
+  "targets": {
+  "enodi-bc": {
+    "hosting": {
+      "talkaboat_hosting": [
+        "talkaboat-hosting"
+      ]
+    }
+  }
+},
   "projects": {
     "default": "enodi-bc"
   }
