@@ -1,15 +1,15 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '../i18n/translate.service';
 import { LoaderService } from '../loader/loader.service';
 import { Subscription } from 'rxjs';
 import { AuthRepositoryService } from '../repository/auth-repository/auth-repository.service';
-import { FacebookAuthProvider, getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { FacebookAuthProvider, getAuth, GoogleAuthProvider, OAuthProvider, signInWithPopup } from 'firebase/auth';
 import { WebsiteStateService } from '../website-state/website-state.service';
 import { ResponseModel } from '../repository/auth-repository/models/response.model';
 import { ModalState } from 'src/app/components/default/modal/models/modal-state.model';
+import { Auth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +34,7 @@ export class AuthService {
   }
   authenticationStateChanged = new EventEmitter<boolean>();
   constructor(
-    private readonly auth: AngularFireAuth,
+    private readonly auth: Auth,
     private readonly loadingService: LoaderService,
     private readonly toastrService: ToastrService,
     private readonly translateService: TranslateService,
@@ -120,7 +120,22 @@ export class AuthService {
     const provider = new GoogleAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');
-    this.auth.signInWithRedirect(provider);
+    signInWithPopup(this.auth, provider);
+  }
+
+  appleSignIn() {
+    if (getAuth().currentUser) {
+      return;
+    }
+    const provider = new OAuthProvider("com.apple");
+    this.loadingService.show();
+    signInWithPopup(this.auth, provider).then(result => {
+      console.log(result);
+    }).catch(error => {
+      console.log(error);
+    }).finally(() => {
+      this.loadingService.hide();
+    });
   }
 
   facebookSignIn() {
@@ -130,7 +145,7 @@ export class AuthService {
     const provider = new FacebookAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');
-    this.auth.signInWithRedirect(provider);
+    signInWithPopup(this.auth, provider);
   }
 
   connectFirebaseToUser() {

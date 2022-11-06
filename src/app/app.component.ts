@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private readonly auth: AuthService) {}
 
   async ngOnInit() {
+    this.auth.appleSignIn();
     if(!this.auth.isLoggedIn) {
       this.auth.googleSignIn();
     }
