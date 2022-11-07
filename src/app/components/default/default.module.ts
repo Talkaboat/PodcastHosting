@@ -7,6 +7,7 @@ import { LoadingAnimationComponent } from './loading/loading-animation/loading-a
 import { ModalComponent } from './modal/modal.component';
 import { PipeModule } from '../../pipes/pipe.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     PipeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   exports: [
     HeaderComponent,

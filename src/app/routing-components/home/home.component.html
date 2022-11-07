@@ -1,1 +1,25 @@
-<p>home works!</p>
+<div class="max-w-lg mx-auto px-5">
+  <h2>{{ "homeEntryTitle" | translate }}</h2>
+  <a routerLink="/create">
+    <button mat-raised-button class="btn btn-primary w-full h-20 normal-case">
+      {{ "createNewPodcast" | translate }}
+    </button>
+  </a>
+
+  <div class="flex my-5">
+    <hr
+      class="border-[1px] border-primary flex-grow my-auto rounded-lg -mr-[1px]"
+    />
+    <span class="border-[2px] border-primary py-1 px-3 rounded-2xl">{{
+      "or" | translate
+    }}</span>
+    <hr
+      class="border-[1px] border-primary flex-grow my-auto rounded-lg -ml-[1px]"
+    />
+  </div>
+  <a routerLink="/manage">
+    <button mat-raised-button class="btn btn-secondary w-full h-20 normal-case">
+      {{ "manageYourPodcasts" | translate }}
+    </button>
+  </a>
+</div>

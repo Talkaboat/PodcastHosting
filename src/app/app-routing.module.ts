@@ -18,6 +18,9 @@ const routes: Routes = [
       import('./routing-components/home/home.module').then((m) => m.HomeModule),
     canActivate: [AuthGuard],
   },
+  { path: 'create', loadChildren: () => import('./routing-components/create-podcast/create-podcast.module').then(m => m.CreatePodcastModule) },
+  { path: 'manage', loadChildren: () => import('./routing-components/manage-podcast/manage-podcast.module').then(m => m.ManagePodcastModule) },
+  { path: 'manage/:id', loadChildren: () => import('./routing-components/edit-podcast/edit-podcast.module').then(m => m.EditPodcastModule) },
 ];
 
 @NgModule({

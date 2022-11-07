@@ -16,6 +16,9 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getAnalytics, provideAnalytics, ScreenTrackingService } from '@angular/fire/analytics';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalComponent } from './components/default/modal/modal.component';
+import { RouterModule } from '@angular/router';
+import { PipeModule } from './pipes/pipe.module';
+import { BackNavigationComponent } from './components/widgets/back-navigation/back-navigation.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,7 @@ import { ModalComponent } from './components/default/modal/modal.component';
       progressBar: true,
       progressAnimation: 'increasing'
     }),
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
@@ -51,6 +54,8 @@ import { ModalComponent } from './components/default/modal/modal.component';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+  ]
 })
 export class AppModule { }

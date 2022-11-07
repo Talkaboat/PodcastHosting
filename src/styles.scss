@@ -77,8 +77,14 @@ html, body {
   @apply relative top-0 hover:top-[-0.3rem] transition-all duration-700;
 }
 
-html, body { height: 100%; }
+html, body { height: 100%; font-size: 16px; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-list-base {
+  .mat-list-item {
+    color: inherit;
+  }
+}
 
 .mat-form-field {
   .mat-input-element {

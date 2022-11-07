@@ -15,7 +15,6 @@ export class AppComponent implements OnInit {
   constructor(private readonly auth: AuthService, private readonly websiteStateService: WebsiteStateService) {}
 
   async ngOnInit() {
-    this.auth.logout();
     this.websiteStateService.onLoginModalStateChanged.subscribe(state => this.isLoginModalOpen = state);
   }
 }

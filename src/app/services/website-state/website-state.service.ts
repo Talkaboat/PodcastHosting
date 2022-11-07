@@ -25,8 +25,12 @@ export class WebsiteStateService {
         loaderService.hide();
         let page = this.formatUrl(ev.urlAfterRedirects);
         page = page ? page : 'Home';
-        this.evaluateHeaderState(page);
+
+
         this.titleService.setTitle('Talkaboat - ' + page);
+        if(ev.urlAfterRedirects.includes('sign-in')) {
+          return;
+        }
         this.navigationHistory.push(ev.urlAfterRedirects);
       }
     });
@@ -34,16 +38,6 @@ export class WebsiteStateService {
 
   openModal() {
 
-  }
-
-  evaluateHeaderState(page: string) {
-    if (page) {
-      if (page == "Home") {
-        this.SetHeaderState("home");
-        return;
-      }
-    }
-    this.SetHeaderState("default");
   }
 
   formatUrl(url: any) {
@@ -92,7 +86,7 @@ export class WebsiteStateService {
       this.navigationHistory.pop();
       this.location.back();
     } else {
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     }
   }
 }

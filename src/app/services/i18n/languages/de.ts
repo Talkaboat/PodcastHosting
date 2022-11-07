@@ -7,6 +7,12 @@ export const de = {
   signInWithGoogle: 'Mit Google anmelden',
   signInWithFacebook: 'Mit Facebook anmelden',
   requestPin: 'Pin anfragen',
-  confirmPin: 'Pin bestätigen'
+  confirmPin: 'Pin bestätigen',
+
+  //#region Home
+  homeEntryTitle: 'Was möchtest du machen?',
+  createNewPodcast: 'Neuen Podcast erstellen',
+  manageYourPodcasts: 'Deine Podcasts verwalten'
+  //#endregion
 }
 

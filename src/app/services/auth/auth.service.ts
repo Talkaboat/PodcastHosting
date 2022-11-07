@@ -60,26 +60,10 @@ export class AuthService {
       this.user = user;
       if (user) {
         this._token = await user.getIdToken(true);
-        if (localStorage.getItem('connectSocial')) {
-          localStorage.removeItem('connectSocial');
-          if (this.isLoggedIn) {
-            this.connectFirebaseToUser();
-          } else {
-            this.connectSub = this.authenticationStateChanged.subscribe(
-              (state) => {
-                if (state) {
-                  this.connectFirebaseToUser();
-                  this.connectSub.unsubscribe();
-                }
-              }
-            );
-          }
-        } else {
-          localStorage.setItem('social_login', 'true');
-          authRepository
-            .loginFirebase(this._token)
-            .subscribe((response) => this.handleResponse(response));
-        }
+        localStorage.setItem('social_login', 'true');
+        authRepository
+          .loginFirebase(this._token)
+          .subscribe((response) => this.handleResponse(response));
       } else {
         loadingService.hide();
       }
@@ -152,10 +136,8 @@ export class AuthService {
     provider.addScope('profile');
     provider.addScope('email');
     signInWithPopup(this.auth, provider)
-      .then((result) => {
-      })
-      .catch((error) => {
-      })
+      .then((result) => {})
+      .catch((error) => {})
       .finally(() => {
         this.loadingService.hide();
       });
@@ -171,10 +153,8 @@ export class AuthService {
     provider.addScope('email');
     this.loadingService.show();
     signInWithPopup(this.auth, provider)
-      .then((result) => {
-      })
-      .catch((error) => {
-      })
+      .then((result) => {})
+      .catch((error) => {})
       .finally(() => {
         this.loadingService.hide();
       });
@@ -190,10 +170,8 @@ export class AuthService {
 
     this.loadingService.show();
     signInWithPopup(this.auth, provider)
-      .then((result) => {
-      })
-      .catch((error) => {
-      })
+      .then((result) => {})
+      .catch((error) => {})
       .finally(() => {
         this.loadingService.hide();
       });
@@ -205,21 +183,24 @@ export class AuthService {
     }
     this.loadingService.show();
     console.log(email);
-    this.authRepository
-      .requestEmailLogin(email)
-      .subscribe({
-        next: (response: ResponseModel) => {
-          if(response.text == "new_account") {
-            this.loadingService.hide();
-            this.toastrService.error(this.translateService.transform("user_not_found"));
-            return;
-          }
-          this.openPinVerificationModal(email) },
-        error: (response: HttpErrorResponse) => {
+    this.authRepository.requestEmailLogin(email).subscribe({
+      next: (response: ResponseModel) => {
+        if (response.text == 'new_account') {
           this.loadingService.hide();
-          this.toastrService.error(this.translateService.transform(response.error.message));
-        },
-      });
+          this.toastrService.error(
+            this.translateService.transform('user_not_found')
+          );
+          return;
+        }
+        this.openPinVerificationModal(email);
+      },
+      error: (response: HttpErrorResponse) => {
+        this.loadingService.hide();
+        this.toastrService.error(
+          this.translateService.transform(response.error.message)
+        );
+      },
+    });
   }
 
   connectFirebaseToUser() {
