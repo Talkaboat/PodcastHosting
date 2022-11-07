@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth/auth.service';
+import { WebsiteStateService } from './services/website-state/website-state.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,12 @@ import { AuthService } from './services/auth/auth.service';
 export class AppComponent implements OnInit {
   title = 'talkaboat_hosting';
 
-  constructor(private readonly auth: AuthService) {}
+  isLoginModalOpen = false;
+
+  constructor(private readonly auth: AuthService, private readonly websiteStateService: WebsiteStateService) {}
 
   async ngOnInit() {
-    if(!this.auth.isLoggedIn) {
-      this.auth.googleSignIn();
-    }
+    this.auth.logout();
+    this.websiteStateService.onLoginModalStateChanged.subscribe(state => this.isLoginModalOpen = state);
   }
 }

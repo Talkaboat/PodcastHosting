@@ -1,7 +1,7 @@
 const enablePurge = true;
 
 module.exports = {
-  important: true,
+  //important: true,
   purge: {
     enabled: enablePurge,
     content: ["./src/**/*.{html,js}", "./src/**/*.scss"],

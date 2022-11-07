@@ -1,9 +1,10 @@
 <app-header></app-header>
 <div class="mb-20 md:mb-0">
-  <!-- <router-outlet></router-outlet> -->
-  <button mat-raised-button color="primary">Primary Button</button>
-  <button mat-raised-button color="accent">Accent Button</button>
-  <button mat-raised-button color="warn">Warn Button</button>
+  <router-outlet></router-outlet>
   <app-loading></app-loading>
 </div>
 <app-footer></app-footer>
+<div class="z-50" *ngIf="isLoginModalOpen">
+  <app-modal></app-modal>
+
+</div>

@@ -15,7 +15,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getAnalytics, provideAnalytics, ScreenTrackingService } from '@angular/fire/analytics';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
+import { ModalComponent } from './components/default/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,6 @@ import { MatButtonModule } from '@angular/material/button';
     AppRoutingModule,
     DefaultModule,
     HttpClientModule,
-    MatButtonModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),

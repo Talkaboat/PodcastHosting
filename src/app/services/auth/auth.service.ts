@@ -122,16 +122,26 @@ export class AuthService {
     if (getAuth().currentUser) {
       return;
     }
+    this.loadingService.show();
     const provider = new GoogleAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');
-    signInWithPopup(this.auth, provider);
+    signInWithPopup(this.auth, provider).then(result => {
+      console.log(result);
+      this.openPinVerificationModal();
+    }).catch(error => {
+      console.log(error);
+    }).finally(() => {
+      this.loadingService.hide();
+    });
   }
 
   appleSignIn() {
     if (getAuth().currentUser) {
       return;
     }
+
+    this.loadingService.show();
     const provider = new OAuthProvider("apple.com");
     provider.addScope('email');
     this.loadingService.show();
@@ -151,12 +161,21 @@ export class AuthService {
     const provider = new FacebookAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');
-    signInWithPopup(this.auth, provider);
+
+    this.loadingService.show();
+    signInWithPopup(this.auth, provider).then(result => {
+      console.log(result);
+    }).catch(error => {
+      console.log(error);
+    }).finally(() => {
+      this.loadingService.hide();
+    });;
   }
 
   connectFirebaseToUser() {
     this.authRepository.connectFirebase(this.token).subscribe({
       next: (_) => {
+        this.loadingService.hide();
         this.toastrService.success(
           this.translateService.transform('connect_firebase_success')
         );
@@ -168,7 +187,6 @@ export class AuthService {
         );
         await this.auth.signOut();
       },
-      complete: () => this.loadingService.hide(),
     });
   }
 }

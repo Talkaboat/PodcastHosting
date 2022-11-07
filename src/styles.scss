@@ -79,3 +79,54 @@ html, body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-form-field {
+  .mat-input-element {
+      color: inherit;
+  }
+  .mat-form-field-label {
+    color: inherit;
+  }
+  .mat-form-field-underline {
+    @apply bg-primary;
+  }
+  .mat-form-field-ripple {
+    @apply bg-primary;
+  }
+  .mat-form-field-required-marker {
+    color: inherit;
+  }
+}
+
+.mat-form-field.mat-focused {
+  .mat-form-field-label {
+    @apply text-secondary;
+  }
+  .mat-form-field-ripple {
+    @apply bg-secondary;
+  }
+  .mat-form-field-required-marker {
+    @apply text-secondary;
+  }
+  .mat-input-element {
+    @apply text-secondary;
+  }
+}
+
+.mat-form-field.mat-form-field-invalid {
+  .mat-input-element {
+      @apply text-error;
+  }
+  .mat-form-field-label {
+    @apply text-error;
+  }
+  .mat-form-field-label {
+    @apply text-error;
+      .mat-form-field-required-marker {
+        @apply text-error;
+      }
+  }
+  .mat-form-field-ripple {
+    @apply bg-error;
+  }
+}

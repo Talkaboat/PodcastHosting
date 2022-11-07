@@ -1,11 +1,16 @@
 <div *ngIf="show" class="z-50">
-    <div class="loader-overlay mx-auto relative">
-        <div class="loader-background bg-shadow-700 bg-opacity-10">
-          <div class="w-full h-full" >
-            <app-loading-animation></app-loading-animation>
+  <div class="loader-overlay mx-auto">
+      <div class="loader-background bg-shadow-700 bg-opacity-10">
+        <div class="w-full h-full" >
+          <app-loading-animation></app-loading-animation>
 
-          </div>
         </div>
-    </div>
+      </div>
+      <!-- <div class="w-[12.5rem] absolute -bottom-10 h-[6.25rem]" *ngIf="isSignRequest">
+        <div class=" mx-auto">
+          <button class="mx-auto text-[1.25rem] w-[16rem] py-3 px-5 md:w-[24rem] font-semibold rounded-[0.625rem] bg-shadow-500  ring-1 ring-main-500" (click)="cancelSignRequest()">Cancel Request</button>
+        </div>
+      </div> -->
+  </div>
 
 </div>

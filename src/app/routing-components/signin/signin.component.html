@@ -1,0 +1,37 @@
+<div class="px-2 max-w-[17rem] sm:max-w-full mx-auto">
+  <mat-card class="bg-base-100 border-primary sm:border-2 text-primary max-w-2xl mx-auto px-2">
+    <h2>Login</h2>
+    <mat-card-content>
+      <form class="text-primary" [formGroup]="modalForm">
+        <div class="flex gap-4 flex-wrap justify-center">
+          <mat-form-field class="text-primary flex-grow ">
+            <label hidden for="email-input">E-Mail</label>
+            <input class="text-primary" name="email-input" matInput placeholder="E-Mail..." [value]="email" formControlName="email" required>
+          </mat-form-field>
+          <button mat-raised-button class="bg-primary w-[10rem] h-10 sm:my-auto !-mt-5 mx-auto" (click)="requestPin()">{{ 'requestPin' | translate }}</button>
+        </div>
+        <ng-container *ngIf="isPinRequired">
+          <div class="flex gap-4 flex-wrap justify-center mt-4">
+            <mat-form-field class="text-primary flex-grow">
+              <label hidden for="pin-input">Pin</label>
+              <input class="text-primary" name="pin-input" matInput placeholder="Pin..." [value]="pin" formControlName="pin" required>
+            </mat-form-field>
+            <button mat-raised-button class="bg-primary w-[10rem] h-10 sm:my-auto mx-auto "  (click)="requestPin()">{{ 'confirmPin' | translate }}</button>
+          </div>
+        </ng-container>
+      </form>
+      <div class="flex sm:px-10 mt-5">
+
+        <hr class="border-[1px] border-primary flex-grow my-auto rounded-lg -mr-[1px]">
+        <span class="border-[2px] border-primary py-1 px-3 rounded-2xl">Or</span>
+        <hr class="border-[1px] border-primary flex-grow my-auto rounded-lg -ml-[1px]">
+      </div>
+      <div class="mx-auto max-w-[17rem] grid grid-cols-1 gap-2 mt-5">
+        <button mat-raised-button class="bg-primary" (click)="signInWithGoogle()">{{ 'signInWithGoogle' | translate }}</button>
+        <button mat-raised-button class="bg-primary" (click)="signInWithFacebook()">{{ 'signInWithFacebook' | translate }}</button>
+        <button mat-raised-button class="bg-primary" (click)="signInWithApple()">{{ 'signInWithApple' | translate }}</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>
