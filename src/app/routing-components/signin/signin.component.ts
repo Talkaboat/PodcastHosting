@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -9,20 +10,17 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./signin.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, OnDestroy {
 
   email = "";
-  pin = "";
 
-  isPinRequired = false;
   modalForm : FormGroup = this.formBuilder.group({
-    email: [this.email, [Validators.required, Validators.email]],
-    pin: [this.pin, [Validators.required]]
+    email: [this.email, [Validators.required, Validators.email]]
   });
 
   subscriptions: Subscription[] = [];
 
-  constructor(private readonly formBuilder: FormBuilder, private readonly authService: AuthService) { }
+  constructor(private readonly formBuilder: FormBuilder, private readonly authService: AuthService, private readonly router: Router) { }
 
   ngOnInit(): void {
     this.forwardIfLoggedIn();
@@ -31,14 +29,18 @@ export class SigninComponent implements OnInit {
     }));
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
   forwardIfLoggedIn() {
     if(this.authService.isLoggedIn) {
-      console.log("isLoggedIn!");
+      this.router.navigate(['home']);
     }
   }
 
   requestPin() {
-    this.isPinRequired = true;
+    this.authService.emailSignIn(this.email);
   }
 
   signInWithGoogle() {

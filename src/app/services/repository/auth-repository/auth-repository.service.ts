@@ -18,12 +18,29 @@ export class AuthRepositoryService extends RepositoryService {
     return this.post<AuthorizationResponse>(api);
   }
 
+  requestEmailLogin(email: string): Observable<ResponseModel> {
+    if (!email) {
+      return of();
+    }
+    const api = AUTH_API.URL + AUTH_API.REQUEST_EMAIL_LOGIN_URL.replace('{email}', email);
+    return this.post<ResponseModel>(api);
+  }
+
   login(wallet: string, signature: string): Observable<AuthorizationResponse> {
     if (!wallet) {
       return of();
     }
     const api = AUTH_API.URL + AUTH_API.LOGIN_URL;
     const body = { address: wallet, signature };
+    return this.post<AuthorizationResponse>(api, body);
+  }
+
+  loginByEmail(email: string, pin: string): Observable<AuthorizationResponse> {
+    if (!email || !pin) {
+      return of();
+    }
+    const api = AUTH_API.URL + AUTH_API.EMAIL_LOGIN_URL;
+    const body = { address: email, signature: pin };
     return this.post<AuthorizationResponse>(api, body);
   }
 

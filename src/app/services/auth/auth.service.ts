@@ -3,13 +3,21 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '../i18n/translate.service';
 import { LoaderService } from '../loader/loader.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable, of } from 'rxjs';
 import { AuthRepositoryService } from '../repository/auth-repository/auth-repository.service';
-import { FacebookAuthProvider, getAuth, GoogleAuthProvider, OAuthProvider, signInWithPopup } from 'firebase/auth';
+import {
+  FacebookAuthProvider,
+  getAuth,
+  GoogleAuthProvider,
+  OAuthProvider,
+  signInWithPopup,
+} from 'firebase/auth';
 import { WebsiteStateService } from '../website-state/website-state.service';
 import { ResponseModel } from '../repository/auth-repository/models/response.model';
 import { ModalState } from 'src/app/components/default/modal/models/modal-state.model';
 import { Auth } from '@angular/fire/auth';
+import { AuthorizationResponse } from '../repository/auth-repository/models/authorization-response.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -56,8 +64,7 @@ export class AuthService {
           localStorage.removeItem('connectSocial');
           if (this.isLoggedIn) {
             this.connectFirebaseToUser();
-          }
-          else {
+          } else {
             this.connectSub = this.authenticationStateChanged.subscribe(
               (state) => {
                 if (state) {
@@ -81,14 +88,18 @@ export class AuthService {
 
   handleResponse(response: ResponseModel) {
     switch (response.text) {
-      case 'connected': this.getLoginToken(response.data); break;
-      case 'not_connected': this.openPinVerificationModal(); break;
+      case 'connected':
+        this.setToken(response.data);
+        break;
+      case 'not_connected':
+        this.openPinVerificationModal();
+        break;
     }
 
     this.loadingService.hide();
   }
 
-  getLoginToken(token: string | undefined) {
+  setToken(token: string | undefined) {
     if (!token) {
       return;
     }
@@ -97,25 +108,39 @@ export class AuthService {
     this.authenticationStateChanged.emit(true);
   }
 
-  openPinVerificationModal() {
-    this.websiteState.modalState = this.getPinVerificationModal();
+  openPinVerificationModal(email: string = '') {
+    this.websiteState.modalState = this.getPinVerificationModal(email);
     this.websiteState.onLoginModalStateChanged.emit(true);
   }
 
-  getPinVerificationModal(): ModalState {
+  getPinVerificationModal(email: string): ModalState {
     return {
-      title: "verify_pin",
-      placeholder: "Pin",
+      title: 'verify_pin',
+      placeholder: 'Pin',
       useTextField: true,
-      onSubmit: (pin: any) => { this.verifyPin(pin); },
-      onClose: () => { }
+      onSubmit: (pin: any) => {
+        if (email) {
+          this.verifyEmailPin(email, pin);
+        } else {
+          this.verifyFirebasePin(pin);
+        }
+      },
+      onClose: () => {},
     };
   }
 
-  verifyPin(pin: string) {
-    this.authRepository.verifyFirebase(this.token, pin).subscribe((response) => {
-      this.handleResponse(response);
+  verifyEmailPin(email: string, pin: string) {
+    this.authRepository.loginByEmail(email, pin).subscribe((response) => {
+      this.setToken(response.token);
     });
+  }
+
+  verifyFirebasePin(pin: string) {
+    this.authRepository
+      .verifyFirebase(this.token, pin)
+      .subscribe((response) => {
+        this.handleResponse(response);
+      });
   }
 
   googleSignIn() {
@@ -126,14 +151,14 @@ export class AuthService {
     const provider = new GoogleAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');
-    signInWithPopup(this.auth, provider).then(result => {
-      console.log(result);
-      this.openPinVerificationModal();
-    }).catch(error => {
-      console.log(error);
-    }).finally(() => {
-      this.loadingService.hide();
-    });
+    signInWithPopup(this.auth, provider)
+      .then((result) => {
+      })
+      .catch((error) => {
+      })
+      .finally(() => {
+        this.loadingService.hide();
+      });
   }
 
   appleSignIn() {
@@ -142,16 +167,17 @@ export class AuthService {
     }
 
     this.loadingService.show();
-    const provider = new OAuthProvider("apple.com");
+    const provider = new OAuthProvider('apple.com');
     provider.addScope('email');
     this.loadingService.show();
-    signInWithPopup(this.auth, provider).then(result => {
-      console.log(result);
-    }).catch(error => {
-      console.log(error);
-    }).finally(() => {
-      this.loadingService.hide();
-    });
+    signInWithPopup(this.auth, provider)
+      .then((result) => {
+      })
+      .catch((error) => {
+      })
+      .finally(() => {
+        this.loadingService.hide();
+      });
   }
 
   facebookSignIn() {
@@ -163,13 +189,37 @@ export class AuthService {
     provider.addScope('email');
 
     this.loadingService.show();
-    signInWithPopup(this.auth, provider).then(result => {
-      console.log(result);
-    }).catch(error => {
-      console.log(error);
-    }).finally(() => {
-      this.loadingService.hide();
-    });;
+    signInWithPopup(this.auth, provider)
+      .then((result) => {
+      })
+      .catch((error) => {
+      })
+      .finally(() => {
+        this.loadingService.hide();
+      });
+  }
+
+  emailSignIn(email: string) {
+    if (this.isLoggedIn) {
+      return;
+    }
+    this.loadingService.show();
+    console.log(email);
+    this.authRepository
+      .requestEmailLogin(email)
+      .subscribe({
+        next: (response: ResponseModel) => {
+          if(response.text == "new_account") {
+            this.loadingService.hide();
+            this.toastrService.error(this.translateService.transform("user_not_found"));
+            return;
+          }
+          this.openPinVerificationModal(email) },
+        error: (response: HttpErrorResponse) => {
+          this.loadingService.hide();
+          this.toastrService.error(this.translateService.transform(response.error.message));
+        },
+      });
   }
 
   connectFirebaseToUser() {

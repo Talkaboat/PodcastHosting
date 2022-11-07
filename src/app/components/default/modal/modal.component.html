@@ -5,7 +5,7 @@
     <h5>{{ subtitle | translate }}</h5>
     <form class="mt-5" *ngIf="useTextField" [formGroup]="modalForm">
       <label for="modalInput"></label>
-      <input formControlName="modalInput" name="modalInput" id="modalInput" type="text" [placeholder]="placeholder | translate" class="rounded-lg py-1 input input-bordered w-full input-info">
+      <input formControlName="modalInput" name="modalInput" id="modalInput" type="text" [placeholder]="placeholder | translate" class="rounded-lg py-1 input input-bordered w-full input-info text-primary">
     </form>
 
     <div class="grid grid-cols-2 gap-5 mt-5">
