@@ -3,14 +3,15 @@
 
   <ng-container *ngIf="podcast && podcast.podcastId !== -1">
     <div class="card card-body bg-neutral">
-      <div class="flex justify-end">
-        <button (click)="refreshPodcast()" [title]="'reset' | translate">
+      <div class="flex justify-between">
+        <app-image-uploader [preview]="preview" (onSelectFile)="onImageSelected($event)"></app-image-uploader>
+        <button (click)="refreshPodcast()" [title]="'reset' | translate" class="h-fit">
           <mat-icon class="hover:animate-spin-slow-inverted">restore</mat-icon></button>
 
       </div>
       <div class="my-3">
 
-        <app-image-uploader [preview]="podcast.image" (onSelectFile)="onImageSelected($event)"></app-image-uploader>
+
       </div>
       <form [formGroup]="modalForm">
         <mat-form-field appearance="fill" class="w-full">

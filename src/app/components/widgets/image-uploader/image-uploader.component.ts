@@ -14,7 +14,12 @@ export class ImageUploaderComponent implements OnInit {
 
   progressInfos: any[] = [];
   message: string[] = [];
-  @Input() preview: string = '';
+  _preview: string = '';
+  @Input() set preview(value: string) {
+    if(value) {
+      this._preview = value;
+    }
+  }
   @Output() onSelectFile: EventEmitter<File> = new EventEmitter<File>();
   imageInfo?: Observable<any>;
 

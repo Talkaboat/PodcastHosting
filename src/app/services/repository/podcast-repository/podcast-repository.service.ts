@@ -11,12 +11,12 @@ import { Podcast } from './models/podcast.model';
 import { PODCAST_API } from './podcast-urls.const';
 import { UpdatePodcastDto } from './models/admin/update-podcast.dto.model';
 import { MEDIA_API } from './media-urls.const';
+import { CreatePodcastDto } from './models/admin/create-podcast.dto.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PodcastRepositoryService extends RepositoryService {
-
 
   public getEpisode(id: string): Observable<Episode> {
     const api = PODCAST_API.URL + PODCAST_API.EPISODE_DETAILS.replace('{id}', id);
@@ -41,6 +41,11 @@ export class PodcastRepositoryService extends RepositoryService {
   getUserPodcasts(): Observable<Podcast[]> {
     const api = PODCAST_API.URL + PODCAST_API.SEARCH_URL + PODCAST_API.CREATOR_PODCASTS;
     return this.get(api);
+  }
+
+  createPodcast(podcast: CreatePodcastDto): Observable<Podcast> {
+    const api = PODCAST_API.URL + PODCAST_API.ADMIN_URL + PODCAST_API.CREATE_PODCAST;
+    return this.post(api, podcast);
   }
 
   updatePodcast(updateData: UpdatePodcastDto): Observable<Podcast> {

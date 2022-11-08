@@ -3,6 +3,7 @@ import { PodcastRepositoryService } from './repository/podcast-repository/podcas
 import { Podcast } from './repository/podcast-repository/models/podcast.model';
 import { Observable, of, tap } from 'rxjs';
 import { Genre } from './repository/podcast-repository/models/genre.model.dto';
+import { CreatePodcastDto } from './repository/podcast-repository/models/admin/create-podcast.dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,13 @@ export class PodcastService {
 
     return this.podcastRepository.getGenres().pipe(tap((genres: Genre[]) => {
       this.genres = genres;
+    }));
+  }
+
+  createPodcast(podcast: CreatePodcastDto): Observable<Podcast> {
+    return this.podcastRepository.createPodcast(podcast).pipe(tap((createdPodcast: Podcast) => {
+      this.userPodcast.push(createdPodcast);
+      console.log(createdPodcast);
     }));
   }
 

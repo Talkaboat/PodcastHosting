@@ -26,13 +26,25 @@ export const de = {
   manageYourPodcasts: 'Deine Podcasts verwalten',
   //#endregion
 
+  //#region Create Podcast
+  successfullyCreatedPodcast: 'Podcast erfolgreich angelegt',
+  createPodcast: 'Podcast erstellen',
+  creationFormInvalid: 'Die eingegebenen Daten sind ungültig. Bitte prüfe deine Eingaben um sicherzugehen, dass alle Notwendigen Informationen vorhanden sind',
+  //#endregion
+
   //#region Edit Podcast
+  selectedImage: 'Ausgewähltes Bild',
   podcastUpdateSuccess: 'Podcast erfolgreich aktualisiert',
   update: 'Aktualisieren',
   title: 'Titel',
   description: 'Beschreibung',
   shortDescription: 'Kurz-Beschreibung',
   reset: 'Zurücksetzen',
-  imageSizeTooLarge: 'Das Bild darf eine maximale größe von 1mb haben!'
+  imageSizeTooLarge: 'Das Bild darf eine maximale größe von 1mb haben!',
+  editFormInvalid: 'Die eingegebenen Daten sind ungültig. Bitte prüfe deine Eingaben um sicherzugehen, dass alle Notwendigen Informationen vorhanden sind',
+  //#endregion
+
+  //#region Backend Error Types
+  too_many_podcasts: 'Du besitzt bereits die maximale Anzahl an Podcasts. Für weitere Podcasts wende dich an talk@aboat-entertainment.com'
   //#endregion
 };

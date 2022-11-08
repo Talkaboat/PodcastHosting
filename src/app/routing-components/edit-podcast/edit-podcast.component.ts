@@ -25,6 +25,7 @@ export class EditPodcastComponent implements OnInit, OnDestroy {
   podcast: Podcast = { podcastId: -1, image: '', genres: '' };
   selectedImage?: File;
   genreList: Genre[] = [];
+  preview: string = '';
 
   @ViewChild('titleTextArea') titleArea: CdkTextareaAutosize | undefined;
   @ViewChild('descriptionTextArea') descriptionArea:
@@ -33,12 +34,13 @@ export class EditPodcastComponent implements OnInit, OnDestroy {
   @ViewChild('shortDescriptionTextArea') shortDescriptionArea:
     | CdkTextareaAutosize
     | undefined;
-
   modalForm = this.formBuilder.group({
     title: [
       this.podcast.title,
       [Validators.required, Validators.maxLength(120), Validators.minLength(4)],
     ],
+
+
     description: [this.podcast.description, [Validators.required]],
     genres: [this.podcast.genres, [Validators.required]],
     author: [this.podcast.publisher],
@@ -88,6 +90,7 @@ export class EditPodcastComponent implements OnInit, OnDestroy {
         const id = +params['id'];
         this.podcastService.getPodcast(id).subscribe((podcast: Podcast) => {
           this.podcast = podcast;
+          this.preview = this.podcast.image;
           this.fillGenreModels();
         });
       })
@@ -115,6 +118,7 @@ export class EditPodcastComponent implements OnInit, OnDestroy {
   onImageSelected(file: File) {
     this.selectedImage = file;
     this.changedImage = true;
+    this.preview = '';
   }
 
   refreshPodcast() {
@@ -123,10 +127,17 @@ export class EditPodcastComponent implements OnInit, OnDestroy {
       .subscribe((podcast: Podcast) => {
         this.podcast = podcast;
         this.fillGenreModels();
+        this.selectedImage = undefined;
+        this.changedImage = false;
+        this.preview = this.podcast.image;
       });
   }
 
   updatePodcast() {
+    if(this.modalForm.invalid) {
+      this.toastr.warning(this.translate.transform('creationFormInvalid'));
+      return;
+    }
     this.loader.show();
     if(this.changedImage && this.selectedImage) {
       this.podcastRepository.uploadPodcastImage(this.podcast.podcastId, this.selectedImage).subscribe({ next: event => {

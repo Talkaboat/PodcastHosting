@@ -18,8 +18,12 @@ accept="image/*"
 (change)="selectFile($event)"
 />
 
-<div class="max-w-[10rem] relative">
-  <img src="{{preview}}" class="preview">
+<div>
+  {{ 'selectedImage' | translate }}
+</div>
+
+<div class="max-w-[10rem] mt-2 relative" [class.w-0]="!_preview" [class.px-3]="!_preview">
+  <img src="{{_preview}}" class="preview">
     <div class="absolute top-0 right-0">
       <button (click)="fileInput.click()"><mat-icon>add_a_photo</mat-icon></button>
     </div>

@@ -1,2 +1,71 @@
-<app-back-navigation></app-back-navigation>
-<p>create-podcast works!</p>
+<div class="px-5 max-w-2xl mx-auto">
+  <app-back-navigation></app-back-navigation>
+
+  <ng-container>
+    <div class="card card-body bg-neutral">
+      <div class="flex justify-end">
+        <button (click)="resetPodcast()" [title]="'reset' | translate">
+          <mat-icon class="hover:animate-spin-slow-inverted">restore</mat-icon></button>
+
+      </div>
+      <div class="pt-3 pb-5 h-fit min-h-[5rem]">
+
+        <app-image-uploader (onSelectFile)="onImageSelected($event)"></app-image-uploader>
+      </div>
+      <form [formGroup]="modalForm">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>{{'title' | translate}}</mat-label>
+          <textarea
+            matInput
+            cdkTextareaAutosize
+            #titleTextArea="cdkTextareaAutosize"
+            class="text-primarytextarea-primary"
+            name="title"
+            formControlName="title"
+            [(ngModel)]="podcast.title"
+            [value]="podcast.title"
+            cdkAutosizeMinRows="1"
+            required
+            cdkAutosizeMaxRows="5"
+          ></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>{{ 'description' | translate }}</mat-label>
+          <textarea
+            matInput
+            cdkTextareaAutosize
+            #descriptionTextArea="cdkTextareaAutosize"
+            class="text-primary border-b-2 border-secondary"
+            name="description"
+            formControlName="description"
+            [(ngModel)]="podcast.description"
+            [value]="podcast.description"
+            cdkAutosizeMinRows="2"
+            required
+            cdkAutosizeMaxRows="10"
+          ></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Genres</mat-label>
+          <mat-select multiple formControlName="genres" [(ngModel)]="selectedGenres">
+            <mat-select-trigger>
+              <div *ngIf="selectedGenres && selectedGenres.length > 0">
+                {{ selectedGenres[0].name }}
+                <span *ngIf="selectedGenres.length > 1" class="example-additional-selection">
+                  (+{{(selectedGenres.length || 0) - 1}} {{selectedGenres.length === 2 ? 'other' : 'others'}})
+                </span>
+              </div>
+
+
+            </mat-select-trigger>
+            <mat-option *ngFor="let genre of genreList" [value]="genre">{{genre.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <hr class="border-primary mb-5">
+        <div class="flex justify-end">
+        <button mat-raised-button (click)="createPodcast()" class="btn btn-primary normal-case w-[10rem]">{{ 'createPodcast' | translate }}</button>
+        </div>
+      </form>
+    </div>
+  </ng-container>
+</div>
