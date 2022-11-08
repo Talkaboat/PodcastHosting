@@ -26,7 +26,7 @@ export class PodcastRepositoryService extends RepositoryService {
     return this.post(api, { id: podcastId, amount, offset, sort});
   }
 
-  public getPodcast(id: string, sort = "desc", offset = 0, amount = 10): Observable<Podcast> {
+  public getPodcast(id: any, sort = "desc", offset = 0, amount = 10): Observable<Podcast> {
     const api = PODCAST_API.URL + PODCAST_API.PODCAST_DETAILS;
     return this.post(api, { id, amount, offset, sort});
   }

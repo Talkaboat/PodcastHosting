@@ -1,2 +1,22 @@
-<app-back-navigation></app-back-navigation>
-<p>edit-podcast works!</p>
+<div class="px-5 max-w-2xl mx-auto">
+  <app-back-navigation></app-back-navigation>
+  <ng-container *ngIf="podcast && podcast.podcastId !== -1">
+    <form [formGroup]="modalForm">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Title</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                #titleTextArea="cdkTextareaAutosize"
+                class="text-primary"
+                name="title"
+                formControlName="title"
+                [(ngModel)]="podcast.title"
+                [value]="podcast.title"
+                cdkAutosizeMinRows="1"
+                required
+                cdkAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+  </form>
+  </ng-container>
+</div>
+

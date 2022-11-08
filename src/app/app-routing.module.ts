@@ -10,7 +10,6 @@ const routes: Routes = [
       import('./routing-components/signin/signin.module').then(
         (m) => m.SigninModule
       ),
-    canActivate: [AuthGuard],
   },
   {
     path: 'home',
@@ -18,9 +17,30 @@ const routes: Routes = [
       import('./routing-components/home/home.module').then((m) => m.HomeModule),
     canActivate: [AuthGuard],
   },
-  { path: 'create', loadChildren: () => import('./routing-components/create-podcast/create-podcast.module').then(m => m.CreatePodcastModule) },
-  { path: 'manage', loadChildren: () => import('./routing-components/manage-podcast/manage-podcast.module').then(m => m.ManagePodcastModule) },
-  { path: 'manage/:id', loadChildren: () => import('./routing-components/edit-podcast/edit-podcast.module').then(m => m.EditPodcastModule) },
+  {
+    path: 'create',
+    loadChildren: () =>
+      import('./routing-components/create-podcast/create-podcast.module').then(
+        (m) => m.CreatePodcastModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'manage',
+    loadChildren: () =>
+      import('./routing-components/manage-podcast/manage-podcast.module').then(
+        (m) => m.ManagePodcastModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'manage/:id',
+    loadChildren: () =>
+      import('./routing-components/edit-podcast/edit-podcast.module').then(
+        (m) => m.EditPodcastModule
+      ),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

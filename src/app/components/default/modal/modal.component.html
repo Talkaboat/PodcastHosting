@@ -1,6 +1,6 @@
 <div *ngIf="!isClosed" class="z-50 fixed left-0 right-0 top-0 bottom-0">
   <button class="absolute w-full h-full bg-base-100 opacity-30" (click)="close()"></button>
-  <div class="relative h-[15rem] w-[20rem] py-3 px-5 md:w-[30rem] rounded-lg bg-primary text-primary-content mx-auto mt-20">
+  <div class="relative h-fit w-[15rem] py-3 px-5 md:w-[20rem] rounded-lg bg-primary text-primary-content mx-auto mt-20">
     <h3>{{ title | translate }}</h3>
     <h5>{{ subtitle | translate }}</h5>
     <form class="mt-5" *ngIf="useTextField" [formGroup]="modalForm">

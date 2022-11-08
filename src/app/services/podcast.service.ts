@@ -9,6 +9,7 @@ import { UserService } from './user.service';
 })
 export class PodcastService {
 
+
   userPodcast: Podcast[] = [];
   constructor(private readonly podcastRepository: PodcastRepositoryService) { }
 
@@ -20,6 +21,14 @@ export class PodcastService {
     return this.podcastRepository.getUserPodcasts().pipe(tap((data: Podcast[]) => {
       this.userPodcast = data;
     }));
+  }
+
+  getPodcast(id: number, refresh: boolean = false): Observable<Podcast> {
+    var results = this.userPodcast.filter(podcast => podcast.podcastId === id);
+    if(!refresh && results && results.length >= 1) {
+      return of(results[0]);
+    }
+    return this.podcastRepository.getPodcast(id);
   }
 
 }

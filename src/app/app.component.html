@@ -1,7 +1,9 @@
 <app-header></app-header>
 <div class="mb-20 md:mb-0">
   <router-outlet></router-outlet>
-  <app-loading></app-loading>
+  <div class="z-40">
+    <app-loading></app-loading>
+  </div>
 </div>
 <app-footer></app-footer>
 <div class="z-50" *ngIf="isLoginModalOpen">

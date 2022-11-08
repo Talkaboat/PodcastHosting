@@ -17,7 +17,6 @@ export class BackNavigationComponent implements OnInit {
 
   canNavigateBack() {
     const canNavigateBack = this.websiteStateService.canNavigateBack();
-    console.log(canNavigateBack);
     return canNavigateBack;
   }
 

@@ -99,7 +99,7 @@ export class AuthService {
 
   getPinVerificationModal(email: string): ModalState {
     return {
-      title: 'verify_pin',
+      title: 'confirmPin',
       placeholder: 'Pin',
       useTextField: true,
       onSubmit: (pin: any) => {
@@ -114,8 +114,14 @@ export class AuthService {
   }
 
   verifyEmailPin(email: string, pin: string) {
-    this.authRepository.loginByEmail(email, pin).subscribe((response) => {
-      this.setToken(response.token);
+    this.authRepository.loginByEmail(email, pin).subscribe({
+      next: (response) => {
+        this.setToken(response.token);
+        this.handleSuccess('successLogin');
+      },
+      error: (response: HttpErrorResponse) => {
+        this.handleError(response.error.message);
+      }
     });
   }
 
@@ -186,38 +192,24 @@ export class AuthService {
     this.authRepository.requestEmailLogin(email).subscribe({
       next: (response: ResponseModel) => {
         if (response.text == 'new_account') {
-          this.loadingService.hide();
-          this.toastrService.error(
-            this.translateService.transform('user_not_found')
-          );
+          this.handleError('user_not_found');
           return;
         }
         this.openPinVerificationModal(email);
       },
       error: (response: HttpErrorResponse) => {
-        this.loadingService.hide();
-        this.toastrService.error(
-          this.translateService.transform(response.error.message)
-        );
+        this.handleError(response.error.message);
       },
     });
   }
 
-  connectFirebaseToUser() {
-    this.authRepository.connectFirebase(this.token).subscribe({
-      next: (_) => {
-        this.loadingService.hide();
-        this.toastrService.success(
-          this.translateService.transform('connect_firebase_success')
-        );
-      },
-      error: async (response) => {
-        this.loadingService.hide();
-        this.toastrService.error(
-          this.translateService.transform(response.error.message)
-        );
-        await this.auth.signOut();
-      },
-    });
+  handleSuccess(successText: string) {
+    this.loadingService.hide();
+    this.toastrService.success(this.translateService.transform(successText));
+  }
+
+  handleError(errorText: string) {
+    this.loadingService.hide();
+    this.toastrService.error(this.translateService.transform(errorText));
   }
 }
