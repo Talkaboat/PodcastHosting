@@ -18,4 +18,10 @@ export class ManagePodcastComponent implements OnInit {
     });
   }
 
+  refreshPodcasts() {
+    this.podcastService.getPodcasts(true).subscribe(podcasts => {
+      this.podcasts = podcasts;
+    });
+  }
+
 }

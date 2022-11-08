@@ -25,6 +25,14 @@ module.exports = {
             transform: "translateY(0px)",
           },
         },
+        "spin-inverted": {
+          "0%": {
+            transform: "rotateZ(0px)",
+          },
+          "100%": {
+            transform: "rotateZ(-360deg)",
+          },
+        },
         "vertical-spin": {
           "0%": {
             transform: "rotateY(0)",
@@ -36,6 +44,7 @@ module.exports = {
       },
       animation: {
         "spin-slow": "spin 3s ease-in-out infinite",
+        "spin-slow-inverted": "spin-inverted 3s ease-in-out infinite",
 
         "bounce-slow": "bounce 3s ease-in-out infinite",
 
@@ -56,6 +65,7 @@ module.exports = {
           primary: "#64A4FD",
           secondary: "#bc8c4b", // "#fdbd64",
           accent: "#5f8d3e",
+          neutral: '#30497B'
         },
       },
     ],

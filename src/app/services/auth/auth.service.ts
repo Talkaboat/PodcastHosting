@@ -188,7 +188,6 @@ export class AuthService {
       return;
     }
     this.loadingService.show();
-    console.log(email);
     this.authRepository.requestEmailLogin(email).subscribe({
       next: (response: ResponseModel) => {
         if (response.text == 'new_account') {

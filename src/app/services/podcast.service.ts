@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core';
 import { PodcastRepositoryService } from './repository/podcast-repository/podcast-repository.service';
 import { Podcast } from './repository/podcast-repository/models/podcast.model';
 import { Observable, of, tap } from 'rxjs';
-import { UserService } from './user.service';
+import { Genre } from './repository/podcast-repository/models/genre.model.dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PodcastService {
-
-
   userPodcast: Podcast[] = [];
+  genres: Genre[] = [];
   constructor(private readonly podcastRepository: PodcastRepositoryService) { }
 
   getPodcasts(refresh: boolean = false): Observable<Podcast[]> {
@@ -28,7 +27,39 @@ export class PodcastService {
     if(!refresh && results && results.length >= 1) {
       return of(results[0]);
     }
-    return this.podcastRepository.getPodcast(id);
+    return this.podcastRepository.getPodcast(id).pipe(tap((podcast: Podcast) => {
+      this.userPodcast = this.userPodcast.filter(entry => entry.podcastId != podcast.podcastId);
+      this.userPodcast.push(podcast);
+    }));
   }
+
+  getGenres(refresh: boolean = false) {
+    if(!refresh && this.genres && this.genres.length > 0) {
+      return of(this.genres);
+    }
+
+    return this.podcastRepository.getGenres().pipe(tap((genres: Genre[]) => {
+      this.genres = genres;
+    }));
+  }
+
+  updatePodcast(podcast: Podcast): Observable<Podcast> {
+    const genreIds = podcast.genreModels?.map(genre => genre.id);
+    return this.podcastRepository.updatePodcast({
+      podcastId: podcast.podcastId,
+      title: podcast.title ?? '',
+      description: podcast.description ?? '',
+      shortDescription: podcast.shortDescription ?? '',
+      language: podcast.language ?? '',
+      country: podcast.country ?? '',
+      genres: genreIds ?? [],
+      website: podcast.website ?? '',
+      author: podcast.publisher ?? ''
+    }).pipe(tap((response: Podcast) => {
+      this.userPodcast = this.userPodcast.filter(entry => entry.podcastId != podcast.podcastId);
+      this.userPodcast.push(response);
+    }))
+  }
+
 
 }

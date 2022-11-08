@@ -1,4 +1,5 @@
 import { Episode } from "./episode.model";
+import { Genre } from "./genre.model.dto";
 import { PodcastExtras } from "./podcast-extras.model";
 
 export interface Podcast {
@@ -6,7 +7,7 @@ export interface Podcast {
   image: string;
   intro?: string;
   shortDescription?: string;
-  genre_ids: number[];
+  genres: string;
   thumbnail?: string;
   publisher_original?: string;
   publisher?: string;
@@ -21,5 +22,6 @@ export interface Podcast {
   itunes_id?: number;
   description?: string;
   explicit_content?: boolean;
+  genreModels?: Genre[];
   isLoading?: boolean;
 }

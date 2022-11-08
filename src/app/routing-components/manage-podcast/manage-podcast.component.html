@@ -1,6 +1,11 @@
 <div class="px-5 max-w-2xl mx-auto">
   <app-back-navigation></app-back-navigation>
   <h2>Welchen Podcasts möchtest du administrieren?</h2>
+  <div class="flex justify-end">
+    <button (click)="refreshPodcasts()" [title]="'reset' | translate">
+      <mat-icon class="hover:animate-spin-slow">refresh</mat-icon></button>
+
+  </div>
   <mat-nav-list class="text-primary-content">
       <a mat-list-item *ngFor="let podcast of podcasts" class=" hover:text-primary bg-primary my-1 rounded-sm flex" [routerLink]="['./', podcast.podcastId]">
         {{ podcast.title }}

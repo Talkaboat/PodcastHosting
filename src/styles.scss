@@ -86,7 +86,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
+.mat-select-value {
+  color: inherit;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  @apply bg-base-100;
+}
 .mat-form-field {
+
   .mat-input-element {
       color: inherit;
   }

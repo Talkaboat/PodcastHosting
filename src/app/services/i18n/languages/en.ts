@@ -25,4 +25,14 @@ export const en = {
   createNewPodcast: 'Create a new podcast',
   manageYourPodcasts: 'Manage your podcasts',
   //#endregion
+
+  //#region Edit Podcast
+  podcastUpdateSuccess: 'Podcast successfully updated',
+  update: 'Update',
+  title: 'Title',
+  description: 'Description',
+  shortDescription: 'Short description',
+  reset: 'Reset',
+  imageSizeTooLarge: 'The image must not be large than 1 mb!'
+  //#endregion
 };

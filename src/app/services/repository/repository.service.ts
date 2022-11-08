@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class RepositoryService {
   protected static readonly repository_prod = "https://api.talkaboat.online/";
   protected static readonly repository_dev = "https://localhost:5001/";
-  protected readonly use_dev_repository = false;
+  protected readonly use_dev_repository = true;
   protected static readonly version = "v1/";
   protected jsonHeaders = new HttpHeaders()
     .set('Content-Type', 'application/json')
@@ -40,5 +40,16 @@ export class RepositoryService {
   public delete(api: string, header?: HttpHeaders): Observable<any> {
     const requestUrl = this.url + api;
     return this.http.delete(requestUrl,  { 'headers': header ? header : this.jsonHeaders });
+  }
+
+  public upload(api: string, file: File, body?: any, header?: HttpHeaders): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    const requestUrl = this.url + api;
+    formData.append('file', file);
+    const req = new HttpRequest('POST', requestUrl, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+    return this.http.request(req);
   }
 }
