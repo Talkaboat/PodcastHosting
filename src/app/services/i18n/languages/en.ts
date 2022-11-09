@@ -41,6 +41,9 @@ export const en = {
   description: 'Description',
   shortDescription: 'Short description',
   reset: 'Reset',
+  podcastDeletionNameMismatch: 'The confirmation does not match with your podcast name!',
+  confirmPodcastDelete: 'Confirm deletion',
+  confirmPodcastDeleteSubtitle: 'Enter <b>{0}</b> to confirm the deletion:',
   imageSizeTooLarge: 'The image must not be large than 1 mb!',
   editFormInvalid:
     'The data entered is invalid. Please check your entries to make sure that all necessary information is available',
@@ -61,6 +64,7 @@ export const en = {
   //#region Episode Deletion
   confirmEpisodeDelete: 'Confirm deletion',
   confirmEpisodeDeleteSubtitle: 'Enter <b>{0}</b> to confirm the deletion:',
+  episodeDeletionNameMismatch: 'The confirmation does not match with your episode name!',
   episodeName: 'Episode...',
   //#endregion
 

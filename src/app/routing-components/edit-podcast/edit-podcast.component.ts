@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild, NgZone } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 import { Podcast } from '../../services/repository/podcast-repository/models/podcast.model';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -11,6 +11,7 @@ import { LoaderService } from '../../services/loader/loader.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '../../services/i18n/translate.service';
 import { PodcastService } from 'src/app/services/podcast/podcast.service';
+import { WebsiteStateService } from '../../services/website-state/website-state.service';
 
 @Component({
   selector: 'app-edit-podcast',
@@ -61,7 +62,9 @@ export class EditPodcastComponent implements OnInit, OnDestroy {
     private readonly podcastRepository: PodcastRepositoryService,
     private readonly loader: LoaderService,
     private readonly toastr: ToastrService,
-    private readonly translate: TranslateService
+    private readonly translate: TranslateService,
+    private readonly router: Router,
+    private readonly websiteState: WebsiteStateService
   ) {}
 
   ngOnDestroy(): void {
@@ -182,5 +185,40 @@ export class EditPodcastComponent implements OnInit, OnDestroy {
   reset() {
     this.uploadProgress = 0;
     this.uploadSub = undefined;
+  }
+
+  deletePodcast() {
+    this.websiteState.modalState = this.getDeletionModalState();
+    this.websiteState.openModal();
+    console.log("Delete");
+  }
+
+  getDeletionModalState() {
+    return {
+      title: 'confirmPodcastDelete',
+      subtitle: this.translate.transform('confirmPodcastDeleteSubtitle', [
+        this.podcast.title!,
+      ]),
+      placeholder: 'Podcast',
+      useTextField: true,
+      onSubmit: (podcastTitle: any) => {
+        if (podcastTitle !== this.podcast.title) {
+          this.toastr.warning(
+            this.translate.transform('podcastDeletionNameMismatch')
+          );
+          return;
+        }
+        this.loader.show();
+        this.podcastService.deletePodcast(this.podcast).subscribe({
+          next: (_: any) => {
+            this.router.navigate(['/manage']);
+            this.loader.hide();
+          }, error: (response: HttpErrorResponse) => {
+            this.handleError(response);
+          }
+        });
+      },
+      onClose: () => {},
+    };
   }
 }

@@ -30,6 +30,13 @@ export class PodcastService {
     }));
   }
 
+  deletePodcast(podcast: Podcast): Observable<Podcast> {
+    return this.podcastRepository.deletePodcast(podcast.podcastId)
+    .pipe(tap((deletedPodcast: Podcast) => {
+      this.userPodcast = this.userPodcast.filter(entry => entry.podcastId != deletedPodcast.podcastId);
+    }));
+  }
+
   getGenres(refresh: boolean = false) {
     if(!refresh && this.genres && this.genres.length > 0) {
       return of(this.genres);

@@ -35,7 +35,7 @@ export class WebsiteStateService {
   }
 
   openModal() {
-
+    this.onLoginModalStateChanged.emit(true);
   }
 
   formatUrl(url: any) {

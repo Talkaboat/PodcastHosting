@@ -68,6 +68,11 @@ export class PodcastRepositoryService extends RepositoryService {
     return this.post(api, { id, amount, offset, sort });
   }
 
+  public deletePodcast(podcastId: any): Observable<Podcast> {
+    const api = PODCAST_API.URL + PODCAST_API.ADMIN_URL + PODCAST_API.DELETE_PODCAST.replace('{podcastId}', podcastId);
+    return this.delete(api);
+  }
+
   getGenres(): Observable<Genre[]> {
     const api = PODCAST_API.URL + PODCAST_API.GENRES_URL;
     return this.get(api);

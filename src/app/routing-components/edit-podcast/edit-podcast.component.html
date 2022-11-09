@@ -82,7 +82,8 @@
             <hr class="border-primary mb-5">
             <div class="flex justify-end">
             <button mat-raised-button (click)="updatePodcast()" class="btn btn-primary normal-case w-[10rem]">{{ 'update' | translate }}</button>
-            </div>
+            <button mat-raised-button (click)="deletePodcast()" class="btn btn-error normal-case w-[7.5rem]">{{ 'delete' | translate }}</button>
+          </div>
           </form>
         </div>
       </mat-tab>

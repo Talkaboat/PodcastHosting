@@ -41,6 +41,9 @@ export const de = {
   description: 'Beschreibung',
   shortDescription: 'Kurz-Beschreibung',
   reset: 'Zurücksetzen',
+  confirmPodcastDelete: 'Löschvorgang bestätigen',
+  confirmPodcastDeleteSubtitle: 'Zum bestätigen bitte den Namen des Podcast <b>{0}</b> eingeben:',
+  podcastDeletionNameMismatch: 'Der eingegebene Podcast-Name stimmt nicht überein!',
   imageSizeTooLarge: 'Das Bild darf eine maximale größe von 1mb haben!',
   editFormInvalid:
     'Die eingegebenen Daten sind ungültig. Bitte prüfe deine Eingaben um sicherzugehen, dass alle Notwendigen Informationen vorhanden sind',
@@ -62,11 +65,13 @@ export const de = {
   confirmEpisodeDelete: 'Löschvorgang bestätigen',
   confirmEpisodeDeleteSubtitle:
     'Zum bestätigen bitte den Namen der Episode <b>{0}</b> eingeben:',
+  episodeDeletionNameMismatch: 'Der eingegebene Episoden-Name stimmt nicht überein!',
   episodeName: 'Episode...',
   //#endregion
 
   //#region Episodes
   selectedAudio: 'Ausgewählter Audio-File',
+  audioSizeTooLarge: 'Die Audio-Datei darf eine maximale größe von 1gb haben!',
   successfullyUpdatedEpisode: 'Episode erfolgreich aktualisiert',
   successfullyCreatedEpisode: 'Episode erfolgreich erstellt',
   audioFileNotFoundInfo: 'Die Audio-Datei wird im Backend aufbereitet. Je nach größe der Datei und Anzahl der Anfragen kann dieser Prozess bis zu 20 Minuten in anspruch nehmen. Deine Audio-Datei wird also nicht direkt nach dem Update angezeigt!'

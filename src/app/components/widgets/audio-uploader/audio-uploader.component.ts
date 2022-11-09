@@ -48,7 +48,7 @@ export class AudioUploaderComponent implements OnInit {
     if (this.selectedFile) {
       if(this.selectedFile.size >= 1024 * 1024 * 1024 * 1) {
         this.selectedFile = undefined;
-        this.toastr.error(this.translate.transform('imageSizeTooLarge'));
+        this.toastr.error(this.translate.transform('audioSizeTooLarge'));
         return;
       }
       const reader = new FileReader();
