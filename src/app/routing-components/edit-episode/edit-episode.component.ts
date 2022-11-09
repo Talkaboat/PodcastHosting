@@ -133,6 +133,7 @@ export class EditEpisodeComponent implements OnInit {
     if(!this.changedAudio) {
       this.reset();
       this.loader.hide();
+      this.completedUpdate();
       return;
     }
     this.podcastRepository.uploadEpisode(this.episode.podcastId, this.episode.episodeId, this.selectedEpisode!).subscribe({ next: (event: any) => {
@@ -150,7 +151,7 @@ export class EditEpisodeComponent implements OnInit {
   }
 
   completedUpdate() {
-    this.toastr.success(this.translate.transform('successfullyCreatedEpisode'))
+    this.toastr.success(this.translate.transform('successfullyUpdatedEpisode'))
     this.reset();
     this.loader.hide();
   }

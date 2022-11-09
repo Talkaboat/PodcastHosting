@@ -64,8 +64,10 @@ export const en = {
   episodeName: 'Episode...',
   //#endregion
 
-  //#region Episode Creation
+  //#region Episode
   selectedAudio: 'Selected Audio-File',
+  successfullyUpdatedEpisode: 'Episode successfully updated',
+  successfullyCreatedEpisode: 'Episode successfully created',
   audioFileNotFoundInfo:
     'The audio file is prepared in the backend. Depending on the size of the file and the number of requests, this process can take up to 20 minutes. So your audio file will not be displayed immediately after the update!',
   //#endregion

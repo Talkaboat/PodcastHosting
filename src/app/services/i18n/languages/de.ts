@@ -65,8 +65,10 @@ export const de = {
   episodeName: 'Episode...',
   //#endregion
 
-  //#region Episode Creation
+  //#region Episodes
   selectedAudio: 'Ausgewählter Audio-File',
+  successfullyUpdatedEpisode: 'Episode erfolgreich aktualisiert',
+  successfullyCreatedEpisode: 'Episode erfolgreich erstellt',
   audioFileNotFoundInfo: 'Die Audio-Datei wird im Backend aufbereitet. Je nach größe der Datei und Anzahl der Anfragen kann dieser Prozess bis zu 20 Minuten in anspruch nehmen. Deine Audio-Datei wird also nicht direkt nach dem Update angezeigt!'
   //#endregion
 };
