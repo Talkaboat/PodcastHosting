@@ -118,6 +118,7 @@ export class AuthService {
       next: (response) => {
         this.setToken(response.token);
         this.handleSuccess('successLogin');
+        this.websiteState.onLoginModalStateChanged.emit(false);
       },
       error: (response: HttpErrorResponse) => {
         this.handleError(response.error.message);
@@ -130,6 +131,7 @@ export class AuthService {
       .verifyFirebase(this.token, pin)
       .subscribe((response) => {
         this.handleResponse(response);
+        this.websiteState.onLoginModalStateChanged.emit(false);
       });
   }
 

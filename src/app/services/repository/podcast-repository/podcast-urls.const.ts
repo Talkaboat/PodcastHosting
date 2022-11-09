@@ -10,5 +10,7 @@ export const PODCAST_API = {
   CREATE_PODCAST: "/create",
   DELETE_PODCAST: "/delete",
   UPDATE_PODCAST: "/update",
-  ADD_EPISODE: "/episode/add"
+  CREATE_EPISODE: "/episode/add",
+  DELETE_EPISODE: "/{podcastId}/episode/{episodeId}",
+  UPDATE_EPISODE: "/episode/update",
 }

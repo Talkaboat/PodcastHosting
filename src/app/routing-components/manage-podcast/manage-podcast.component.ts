@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PodcastService } from 'src/app/services/podcast/podcast.service';
 import { Podcast } from 'src/app/services/repository/podcast-repository/models/podcast.model';
-import { PodcastService } from '../../services/podcast.service';
-
 @Component({
   selector: 'app-manage-podcast',
   templateUrl: './manage-podcast.component.html',
@@ -19,7 +18,7 @@ export class ManagePodcastComponent implements OnInit {
   }
 
   refreshPodcasts() {
-    this.podcastService.getPodcasts(true).subscribe(podcasts => {
+    this.podcastService.getPodcasts().subscribe(podcasts => {
       this.podcasts = podcasts;
     });
   }

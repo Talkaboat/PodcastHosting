@@ -11,7 +11,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatListModule } from '@angular/material/list';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AudioUploaderComponent } from './audio-uploader/audio-uploader.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
+import { VgControlsModule } from '@videogular/ngx-videogular/controls';
+import { VgCoreModule } from '@videogular/ngx-videogular/core';
+import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
+import { VgStreamingModule } from '@videogular/ngx-videogular/streaming';
 
 const materialModules = [
   MatCardModule,
@@ -27,17 +33,24 @@ const materialModules = [
 @NgModule({
   declarations: [
     BackNavigationComponent,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    AudioUploaderComponent
   ],
   imports: [
     CommonModule,
     PipeModule,
-    ...materialModules
+    ...materialModules,
+    VgCoreModule,
+    VgControlsModule,
+    VgBufferingModule,
+    VgOverlayPlayModule,
+    VgStreamingModule,
 
   ],
   exports: [
     BackNavigationComponent,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    AudioUploaderComponent,
   ]
 })
 export class WidgetsModule { }

@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription, take } from 'rxjs';
 import { TranslateService } from 'src/app/services/i18n/translate.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
-import { PodcastService } from 'src/app/services/podcast.service';
+import { PodcastService } from 'src/app/services/podcast/podcast.service';
 import { Genre } from 'src/app/services/repository/podcast-repository/models/genre.model.dto';
 import { PodcastRepositoryService } from 'src/app/services/repository/podcast-repository/podcast-repository.service';
 import { CreatePodcastDto } from '../../services/repository/podcast-repository/models/admin/create-podcast.dto.model';

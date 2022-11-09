@@ -1,0 +1,83 @@
+<div class="px-5 max-w-2xl mx-auto">
+  <app-back-navigation></app-back-navigation>
+
+  <ng-container *ngIf="episode.episodeId != -1">
+    <div class="card card-body bg-neutral">
+      <div class="flex justify-between">
+        <div class="pb-5 h-fit min-h-[5rem]">
+          <app-image-uploader
+          [preview]="episode.image"
+            (onSelectFile)="onImageSelected($event)"
+          ></app-image-uploader>
+        </div>
+        <button
+          (click)="getEpisode(episode.episodeId, true)"
+          [title]="'reset' | translate"
+          class="h-fit"
+        >
+          <mat-icon class="hover:animate-spin-slow-inverted">restore</mat-icon>
+        </button>
+      </div>
+
+      <form [formGroup]="modalForm">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>{{ "title" | translate }}</mat-label>
+          <textarea
+            matInput
+            cdkTextareaAutosize
+            #titleTextArea="cdkTextareaAutosize"
+            class="text-primarytextarea-primary"
+            name="title"
+            formControlName="title"
+            [(ngModel)]="episode.title"
+            [value]="episode.title"
+            cdkAutosizeMinRows="1"
+            required
+            cdkAutosizeMaxRows="5"
+          ></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>{{ "description" | translate }}</mat-label>
+          <textarea
+            matInput
+            cdkTextareaAutosize
+            #descriptionTextArea="cdkTextareaAutosize"
+            class="text-primary border-b-2 border-secondary"
+            name="description"
+            formControlName="description"
+            [(ngModel)]="episode.description"
+            [value]="episode.description"
+            cdkAutosizeMinRows="2"
+            required
+            cdkAutosizeMaxRows="10"
+          ></textarea>
+        </mat-form-field>
+        <app-audio-uploader
+        [preview]="episode.audio"
+          (onSelectFile)="onEpisodeSelected($event)"
+        ></app-audio-uploader>
+        <p>{{ 'audioFileNotFoundInfo' | translate }}</p>
+        <hr class="border-primary mb-5" />
+        <div class="flex justify-end">
+          <button
+            mat-raised-button
+            (click)="editEpisode()"
+            class="btn btn-primary normal-case w-[10rem]"
+          >
+            {{ "update" | translate }}
+          </button>
+        </div>
+      </form>
+      <ng-container *ngIf="uploadStep != 0">
+        <p>{{ "creationStep" }}: {{ uploadStep }}/3</p>
+        <mat-slider
+          [(ngModel)]="uploadProgress"
+          min="0"
+          max="100"
+          step="1"
+          disabled="true"
+        ></mat-slider>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

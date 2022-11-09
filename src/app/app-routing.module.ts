@@ -41,6 +41,8 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
+  { path: 'create/:id/episode', loadChildren: () => import('./routing-components/create-episode/create-episode.module').then(m => m.CreateEpisodeModule) },
+  { path: 'manage/:id/episode/:episodeId', loadChildren: () => import('./routing-components/edit-episode/edit-episode.module').then(m => m.EditEpisodeModule) },
 ];
 
 @NgModule({

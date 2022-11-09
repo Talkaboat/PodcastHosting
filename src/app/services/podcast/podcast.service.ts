@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { PodcastRepositoryService } from './repository/podcast-repository/podcast-repository.service';
-import { Podcast } from './repository/podcast-repository/models/podcast.model';
 import { Observable, of, tap } from 'rxjs';
-import { Genre } from './repository/podcast-repository/models/genre.model.dto';
-import { CreatePodcastDto } from './repository/podcast-repository/models/admin/create-podcast.dto.model';
+import { CreatePodcastDto } from '../repository/podcast-repository/models/admin/create-podcast.dto.model';
+import { Genre } from '../repository/podcast-repository/models/genre.model.dto';
+import { Podcast } from '../repository/podcast-repository/models/podcast.model';
+import { PodcastRepositoryService } from '../repository/podcast-repository/podcast-repository.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,7 @@ export class PodcastService {
   genres: Genre[] = [];
   constructor(private readonly podcastRepository: PodcastRepositoryService) { }
 
-  getPodcasts(refresh: boolean = false): Observable<Podcast[]> {
-    if(!refresh && this.userPodcast.length > 0) {
-      return of(this.userPodcast);
-    }
-
+  getPodcasts(): Observable<Podcast[]> {
     return this.podcastRepository.getUserPodcasts().pipe(tap((data: Podcast[]) => {
       this.userPodcast = data;
     }));
@@ -52,7 +48,7 @@ export class PodcastService {
   }
 
   updatePodcast(podcast: Podcast): Observable<Podcast> {
-    const genreIds = podcast.genreModels?.map(genre => genre.id);
+    const genreIds = podcast.genreModels?.map((genre: Genre) => genre.id);
     return this.podcastRepository.updatePodcast({
       podcastId: podcast.podcastId,
       title: podcast.title ?? '',

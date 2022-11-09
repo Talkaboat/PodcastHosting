@@ -2,86 +2,99 @@
   <app-back-navigation></app-back-navigation>
 
   <ng-container *ngIf="podcast && podcast.podcastId !== -1">
-    <div class="card card-body bg-neutral">
-      <div class="flex justify-between">
-        <app-image-uploader [preview]="preview" (onSelectFile)="onImageSelected($event)"></app-image-uploader>
-        <button (click)="refreshPodcast()" [title]="'reset' | translate" class="h-fit">
-          <mat-icon class="hover:animate-spin-slow-inverted">restore</mat-icon></button>
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab [label]="'Podcast'">
+        <div class="card card-body bg-neutral">
+          <div class="flex justify-between">
+            <app-image-uploader [preview]="preview" (onSelectFile)="onImageSelected($event)"></app-image-uploader>
+            <button (click)="refreshPodcast()" [title]="'reset' | translate" class="h-fit">
+              <mat-icon class="hover:animate-spin-slow-inverted">restore</mat-icon></button>
 
-      </div>
-      <div class="my-3">
-
-
-      </div>
-      <form [formGroup]="modalForm">
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label>{{'title' | translate}}</mat-label>
-          <textarea
-            matInput
-            cdkTextareaAutosize
-            #titleTextArea="cdkTextareaAutosize"
-            class="text-primarytextarea-primary"
-            name="title"
-            formControlName="title"
-            [(ngModel)]="podcast.title"
-            [value]="podcast.title"
-            cdkAutosizeMinRows="1"
-            required
-            cdkAutosizeMaxRows="5"
-          ></textarea>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label>{{ 'description' | translate }}</mat-label>
-          <textarea
-            matInput
-            cdkTextareaAutosize
-            #descriptionTextArea="cdkTextareaAutosize"
-            class="text-primary border-b-2 border-secondary"
-            name="description"
-            formControlName="description"
-            [(ngModel)]="podcast.description"
-            [value]="podcast.description"
-            cdkAutosizeMinRows="2"
-            required
-            cdkAutosizeMaxRows="10"
-          ></textarea>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="w-full rounded-lg">
-          <mat-label>{{ 'shortDescription' | translate }}</mat-label>
-          <textarea
-            matInput
-            cdkTextareaAutosize
-            #shortDescriptionTextArea="cdkTextareaAutosize"
-            class="text-primary rounded-lg"
-            name="shortDescription"
-            formControlName="shortDescription"
-            [(ngModel)]="podcast.shortDescription"
-            [value]="podcast.shortDescription"
-            cdkAutosizeMinRows="2"
-            cdkAutosizeMaxRows="10"
-          ></textarea>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Genres</mat-label>
-          <mat-select multiple formControlName="genres" [(ngModel)]="podcast.genreModels">
-            <mat-select-trigger>
-              <div *ngIf="podcast.genreModels && podcast.genreModels.length > 0">
-                {{ podcast.genreModels[0].name }}
-                <span *ngIf="podcast.genreModels.length > 1" class="example-additional-selection">
-                  (+{{(podcast.genreModels.length || 0) - 1}} {{podcast.genreModels.length === 2 ? 'other' : 'others'}})
-                </span>
-              </div>
+          </div>
+          <div class="my-3">
 
 
-            </mat-select-trigger>
-            <mat-option *ngFor="let genre of genreList" [value]="genre">{{genre.name}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <hr class="border-primary mb-5">
-        <div class="flex justify-end">
-        <button mat-raised-button (click)="updatePodcast()" class="btn btn-primary normal-case w-[10rem]">{{ 'update' | translate }}</button>
+          </div>
+          <form [formGroup]="modalForm">
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>{{'title' | translate}}</mat-label>
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                #titleTextArea="cdkTextareaAutosize"
+                class="text-primarytextarea-primary"
+                name="title"
+                formControlName="title"
+                [(ngModel)]="podcast.title"
+                [value]="podcast.title"
+                cdkAutosizeMinRows="1"
+                required
+                cdkAutosizeMaxRows="5"
+              ></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>{{ 'description' | translate }}</mat-label>
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                #descriptionTextArea="cdkTextareaAutosize"
+                class="text-primary border-b-2 border-secondary"
+                name="description"
+                formControlName="description"
+                [(ngModel)]="podcast.description"
+                [value]="podcast.description"
+                cdkAutosizeMinRows="2"
+                required
+                cdkAutosizeMaxRows="10"
+              ></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-full rounded-lg">
+              <mat-label>{{ 'shortDescription' | translate }}</mat-label>
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                #shortDescriptionTextArea="cdkTextareaAutosize"
+                class="text-primary rounded-lg"
+                name="shortDescription"
+                formControlName="shortDescription"
+                [(ngModel)]="podcast.shortDescription"
+                [value]="podcast.shortDescription"
+                cdkAutosizeMinRows="2"
+                cdkAutosizeMaxRows="10"
+              ></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Genres</mat-label>
+              <mat-select multiple formControlName="genres" [(ngModel)]="podcast.genreModels">
+                <mat-select-trigger>
+                  <div *ngIf="podcast.genreModels && podcast.genreModels.length > 0">
+                    {{ podcast.genreModels[0].name }}
+                    <span *ngIf="podcast.genreModels.length > 1" class="example-additional-selection">
+                      (+{{(podcast.genreModels.length || 0) - 1}} {{podcast.genreModels.length === 2 ? 'other' : 'others'}})
+                    </span>
+                  </div>
+
+
+                </mat-select-trigger>
+                <mat-option *ngFor="let genre of genreList" [value]="genre">{{genre.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <hr class="border-primary mb-5">
+            <div class="flex justify-end">
+            <button mat-raised-button (click)="updatePodcast()" class="btn btn-primary normal-case w-[10rem]">{{ 'update' | translate }}</button>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+      </mat-tab>
+      <mat-tab [label]="'episodes' | translate">
+        <ng-template matTabContent>
+          <app-episode-list [podcastId]="podcast.podcastId">
+
+          </app-episode-list>
+        </ng-template>
+
+      </mat-tab>
+    </mat-tab-group>
+
   </ng-container>
 </div>

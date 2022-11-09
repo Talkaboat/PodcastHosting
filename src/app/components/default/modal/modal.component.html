@@ -1,8 +1,8 @@
 <div *ngIf="!isClosed" class="z-50 fixed left-0 right-0 top-0 bottom-0">
   <button class="absolute w-full h-full bg-base-100 opacity-30" (click)="close()"></button>
-  <div class="relative h-fit w-[15rem] py-3 px-5 md:w-[20rem] rounded-lg bg-primary text-primary-content mx-auto mt-20">
+  <div class="relative h-fit w-[15rem] py-3 px-5 md:w-[20rem] rounded-lg bg-neutral text-neutral-content mx-auto mt-20">
     <h3>{{ title | translate }}</h3>
-    <h5>{{ subtitle | translate }}</h5>
+    <h5 [innerHtml]="subtitle | translate"></h5>
     <form class="mt-5" *ngIf="useTextField" [formGroup]="modalForm">
       <label for="modalInput"></label>
       <input formControlName="modalInput" name="modalInput" id="modalInput" type="text" [placeholder]="placeholder | translate" class="rounded-lg py-1 input input-bordered w-full input-info text-primary">
@@ -10,8 +10,8 @@
 
     <div class="grid grid-cols-2 gap-5 mt-5">
 
-      <button class="w-full bg-base-100 text-base-content rounded-lg py-2" (click)="submit()">{{ 'submit' | translate }}</button>
-      <button class="w-[50%] btn-error rounded-lg py-2" (click)="close()">{{ 'cancel' | translate }}</button>
+      <button class="w-full bg-primary text-primary-content rounded-lg py-2" (click)="submit()">{{ 'submit' | translate }}</button>
+      <button class="w-[70%] btn-error rounded-lg py-2" (click)="close()">{{ 'cancel' | translate }}</button>
     </div>
   </div>
 </div>

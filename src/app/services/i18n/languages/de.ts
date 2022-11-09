@@ -29,7 +29,8 @@ export const de = {
   //#region Create Podcast
   successfullyCreatedPodcast: 'Podcast erfolgreich angelegt',
   createPodcast: 'Podcast erstellen',
-  creationFormInvalid: 'Die eingegebenen Daten sind ungültig. Bitte prüfe deine Eingaben um sicherzugehen, dass alle Notwendigen Informationen vorhanden sind',
+  creationFormInvalid:
+    'Die eingegebenen Daten sind ungültig. Bitte prüfe deine Eingaben um sicherzugehen, dass alle Notwendigen Informationen vorhanden sind',
   //#endregion
 
   //#region Edit Podcast
@@ -41,10 +42,31 @@ export const de = {
   shortDescription: 'Kurz-Beschreibung',
   reset: 'Zurücksetzen',
   imageSizeTooLarge: 'Das Bild darf eine maximale größe von 1mb haben!',
-  editFormInvalid: 'Die eingegebenen Daten sind ungültig. Bitte prüfe deine Eingaben um sicherzugehen, dass alle Notwendigen Informationen vorhanden sind',
+  editFormInvalid:
+    'Die eingegebenen Daten sind ungültig. Bitte prüfe deine Eingaben um sicherzugehen, dass alle Notwendigen Informationen vorhanden sind',
   //#endregion
 
   //#region Backend Error Types
-  too_many_podcasts: 'Du besitzt bereits die maximale Anzahl an Podcasts. Für weitere Podcasts wende dich an talk@aboat-entertainment.com'
+  too_many_podcasts:
+    'Du besitzt bereits die maximale Anzahl an Podcasts. Für weitere Podcasts wende dich an talk@aboat-entertainment.com',
+  //#endregion
+
+  //#region Episode List
+  episodes: 'Episoden',
+  publishingDate: 'Veröffentlicht',
+  actions: 'Aktionen',
+  createNewEpisode: 'Neue Episode anlegen',
+  //#endregion
+
+  //#region Episode Deletion
+  confirmEpisodeDelete: 'Löschvorgang bestätigen',
+  confirmEpisodeDeleteSubtitle:
+    'Zum bestätigen bitte den Namen der Episode <b>{0}</b> eingeben:',
+  episodeName: 'Episode...',
+  //#endregion
+
+  //#region Episode Creation
+  selectedAudio: 'Ausgewählter Audio-File',
+  audioFileNotFoundInfo: 'Die Audio-Datei wird im Backend aufbereitet. Je nach größe der Datei und Anzahl der Anfragen kann dieser Prozess bis zu 20 Minuten in anspruch nehmen. Deine Audio-Datei wird also nicht direkt nach dem Update angezeigt!'
   //#endregion
 };

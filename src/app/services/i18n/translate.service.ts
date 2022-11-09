@@ -92,7 +92,7 @@ export class TranslateService {
     return lang;
   }
 
-  public transform(code: string, args?: any) {
+  public transform(code: string, args: string[] = []) {
     let result: string;
 
     if (!this.locale && !this.changeLanguage(this.getParameterValue(window.location.href, this.langQueryIdentifier), true)) {
@@ -102,10 +102,9 @@ export class TranslateService {
 
     result = this.dictionary[code];
 
-    for (const arg in args) {
-      if (args.hasOwnProperty(arg)) {
-        result = result.replace("${" + arg + "}", args[arg]);
-      }
+    for(let i = 0; i < args.length; i++) {
+      console.log(args[i]);
+      result = result.replace("{" + i + "}", args[i]);
     }
 
     if (!result) {

@@ -12,49 +12,118 @@ import { PODCAST_API } from './podcast-urls.const';
 import { UpdatePodcastDto } from './models/admin/update-podcast.dto.model';
 import { MEDIA_API } from './media-urls.const';
 import { CreatePodcastDto } from './models/admin/create-podcast.dto.model';
+import { CreateEpisodeDto } from './models/admin/create-episode.dto.model';
+import { UpdateEpisodeDto } from './models/admin/update-episode.dto.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PodcastRepositoryService extends RepositoryService {
 
+  public createEpisode(episode: CreateEpisodeDto): Observable<Episode> {
+    const api = PODCAST_API.URL + PODCAST_API.ADMIN_URL + PODCAST_API.CREATE_EPISODE;
+    return this.post(api, episode);
+  }
+
+  public deleteEpisode(podcastId: number, episodeId: number) {
+    const api =
+      PODCAST_API.URL +
+      PODCAST_API.ADMIN_URL +
+      PODCAST_API.DELETE_EPISODE.replace(
+        '{podcastId}',
+        podcastId.toString()
+      ).replace('{episodeId}', episodeId.toString());
+
+      return this.delete(api);
+  }
+
   public getEpisode(id: string): Observable<Episode> {
-    const api = PODCAST_API.URL + PODCAST_API.EPISODE_DETAILS.replace('{id}', id);
+    const api =
+      PODCAST_API.URL + PODCAST_API.EPISODE_DETAILS.replace('{id}', id);
     return this.post(api, null);
   }
 
-  public getEpisodes(podcastId: string, sort = 'desc', amount = -1, offset = 0,): Observable<Episode[]> {
+  public updateEpisode(episode: UpdateEpisodeDto): Observable<Episode> {
+    const api = PODCAST_API.URL + PODCAST_API.ADMIN_URL + PODCAST_API.UPDATE_EPISODE;
+    return this.put(api, episode);
+  }
+
+  public getEpisodes(
+    podcastId: string,
+    sort = 'desc',
+    amount = -1,
+    offset = 0
+  ): Observable<Episode[]> {
     const api = PODCAST_API.URL + PODCAST_API.PODCAST_EPISODES;
-    return this.post(api, { id: podcastId, amount, offset, sort});
+    return this.post(api, { id: podcastId, amount, offset, sort });
   }
 
-  public getPodcast(id: any, sort = 'desc', offset = 0, amount = 10): Observable<Podcast> {
+  public getPodcast(
+    id: any,
+    sort = 'desc',
+    offset = 0,
+    amount = 10
+  ): Observable<Podcast> {
     const api = PODCAST_API.URL + PODCAST_API.PODCAST_DETAILS;
-    return this.post(api, { id, amount, offset, sort});
+    return this.post(api, { id, amount, offset, sort });
   }
 
-  getGenres() : Observable<Genre[]> {
+  getGenres(): Observable<Genre[]> {
     const api = PODCAST_API.URL + PODCAST_API.GENRES_URL;
     return this.get(api);
   }
 
   getUserPodcasts(): Observable<Podcast[]> {
-    const api = PODCAST_API.URL + PODCAST_API.SEARCH_URL + PODCAST_API.CREATOR_PODCASTS;
+    const api =
+      PODCAST_API.URL + PODCAST_API.SEARCH_URL + PODCAST_API.CREATOR_PODCASTS;
     return this.get(api);
   }
 
   createPodcast(podcast: CreatePodcastDto): Observable<Podcast> {
-    const api = PODCAST_API.URL + PODCAST_API.ADMIN_URL + PODCAST_API.CREATE_PODCAST;
+    const api =
+      PODCAST_API.URL + PODCAST_API.ADMIN_URL + PODCAST_API.CREATE_PODCAST;
     return this.post(api, podcast);
   }
 
   updatePodcast(updateData: UpdatePodcastDto): Observable<Podcast> {
-    const api = PODCAST_API.URL + PODCAST_API.ADMIN_URL + PODCAST_API.UPDATE_PODCAST;
+    const api =
+      PODCAST_API.URL + PODCAST_API.ADMIN_URL + PODCAST_API.UPDATE_PODCAST;
     return this.put(api, updateData);
   }
 
   uploadPodcastImage(podcastId: number, image: File) {
-    const api = MEDIA_API.URL + MEDIA_API.UPLOAD_PODCAST_IMAGE.replace('{podcastId}', podcastId.toString());
+    const api =
+      MEDIA_API.URL +
+      MEDIA_API.UPLOAD_PODCAST_IMAGE.replace(
+        '{podcastId}',
+        podcastId.toString()
+      );
+    return this.upload(api, image);
+  }
+
+  uploadEpisode(podcastId: number, episodeId: number, audio: File) {
+    const api =
+    MEDIA_API.URL +
+    MEDIA_API.UPLOAD_EPISODE.replace(
+      '{podcastId}',
+      podcastId.toString()
+    ).replace(
+      '{episodeId}',
+      episodeId.toString()
+    );
+  return this.upload(api, audio);
+  }
+
+  uploadEpisodeImage(podcastId: number, episodeId: number, image: File) {
+    const api =
+      MEDIA_API.URL +
+      MEDIA_API.UPLOAD_EPISODE_IMAGE.replace(
+        '{podcastId}',
+        podcastId.toString()
+      ).replace(
+        '{episodeId}',
+        episodeId.toString()
+      );
     return this.upload(api, image);
   }
 }

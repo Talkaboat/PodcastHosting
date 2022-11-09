@@ -20,7 +20,7 @@ export class ModalComponent implements OnInit {
   private readonly ALPHA_NUMERIC_REGEX = /^[a-zA-Z0-9_]*$/;
 
   modalForm: FormGroup = this.formBuilder.group({
-    modalInput: ['', [Validators.required, Validators.maxLength(12), Validators.minLength(3), this.alphaNumericValidator(this.ALPHA_NUMERIC_REGEX)]],
+    modalInput: ['', [Validators.required]],
   });
   constructor(private readonly formBuilder: FormBuilder, private readonly websiteState: WebsiteStateService) { }
 
@@ -40,8 +40,6 @@ export class ModalComponent implements OnInit {
 
   submit() {
     if (this.modalForm.valid || !this.useTextField) {
-
-    this.websiteState.onLoginModalStateChanged.emit(false);
       this.onSubmit.emit(this.modalForm.get("modalInput")?.value);
     }
   }

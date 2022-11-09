@@ -1,0 +1,40 @@
+<div *ngFor="let progressInfo of progressInfos">
+  <span>{{ progressInfo.fileName }}</span>
+  <mat-toolbar class="progress-bar">
+    <mat-progress-bar
+      color="accent"
+      [value]="progressInfo.value"
+    ></mat-progress-bar>
+    <span class="progress">{{ progressInfo.value }}%</span>
+  </mat-toolbar>
+</div>
+<input
+#fileInput
+class="hidden"
+type="file"
+id="fileInput"
+name="fileInput"
+accept="audio/*, video/*"
+(change)="selectFile($event)"
+/>
+
+<div>
+  {{ 'selectedAudio' | translate }}
+</div>
+
+<div *ngIf="selectedFileName" class="mt-3">
+  {{selectedFileName}}
+</div>
+
+<div class="w-full flex gap-5 py-2" [class.w-0]="!_preview" [class.px-3]="!_preview">
+    <div class="my-auto">
+      <button (click)="fileInput.click()"><mat-icon>file_upload</mat-icon></button>
+    </div>
+    <vg-player (onPlayerReady)="videoPlayerInit($event)" class="bg-neutral">
+      <audio #myMedia #vgHls="vgHls" [vgMedia]="$any(myMedia)" controls [vgHls]="this._preview" *ngIf="this._preview" crossorigin>
+      </audio>
+    </vg-player>
+
+
+</div>
+

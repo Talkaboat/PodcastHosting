@@ -29,7 +29,8 @@ export const en = {
   //#region Create Podcast
   successfullyCreatedPodcast: 'Podcast successfully created',
   createPodcast: 'Create podcast',
-  creationFormInvalid: 'The data entered is invalid. Please check your entries to make sure that all necessary information is available',
+  creationFormInvalid:
+    'The data entered is invalid. Please check your entries to make sure that all necessary information is available',
   //#endregion
 
   //#region Edit Podcast
@@ -41,10 +42,31 @@ export const en = {
   shortDescription: 'Short description',
   reset: 'Reset',
   imageSizeTooLarge: 'The image must not be large than 1 mb!',
-  editFormInvalid: 'The data entered is invalid. Please check your entries to make sure that all necessary information is available',
+  editFormInvalid:
+    'The data entered is invalid. Please check your entries to make sure that all necessary information is available',
   //#endregion
 
-    //#region Backend Error Types
-    too_many_podcasts: 'You already have the maximum number of podcasts. For more podcasts, contact talk@aboat-entertainment.com'
-    //#endregion
+  //#region Backend Error Types
+  too_many_podcasts:
+    'You already have the maximum number of podcasts. For more podcasts, contact talk@aboat-entertainment.com',
+  //#endregion
+
+  //#region Episode List
+  episodes: 'Episodes',
+  publishingDate: 'Published',
+  actions: 'Actions',
+  createNewEpisode: 'Create new episode',
+  //#endregion
+
+  //#region Episode Deletion
+  confirmEpisodeDelete: 'Confirm deletion',
+  confirmEpisodeDeleteSubtitle: 'Enter <b>{0}</b> to confirm the deletion:',
+  episodeName: 'Episode...',
+  //#endregion
+
+  //#region Episode Creation
+  selectedAudio: 'Selected Audio-File',
+  audioFileNotFoundInfo:
+    'The audio file is prepared in the backend. Depending on the size of the file and the number of requests, this process can take up to 20 minutes. So your audio file will not be displayed immediately after the update!',
+  //#endregion
 };

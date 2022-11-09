@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, take } from 'rxjs';
-import { PodcastService } from '../../services/podcast.service';
 import { Podcast } from '../../services/repository/podcast-repository/models/podcast.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
@@ -11,6 +10,7 @@ import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { LoaderService } from '../../services/loader/loader.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '../../services/i18n/translate.service';
+import { PodcastService } from 'src/app/services/podcast/podcast.service';
 
 @Component({
   selector: 'app-edit-podcast',
