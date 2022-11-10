@@ -19,7 +19,7 @@ export class AudioUploaderComponent implements OnInit {
   @Input() set preview(value: string) {
     if(value) {
       if(value.includes('format=m3u8-aapl')) {
-       this._preview = `${value}`;
+       this._preview = `${value}.m3u8`;
        console.log(this._preview);
       } else {
         this._preview = value;
