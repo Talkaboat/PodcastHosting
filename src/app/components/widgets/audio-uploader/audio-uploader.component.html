@@ -30,10 +30,8 @@ accept="audio/*, video/*"
     <div class="my-auto">
       <button (click)="fileInput.click()"><mat-icon>file_upload</mat-icon></button>
     </div>
-    <vg-player (onPlayerReady)="videoPlayerInit($event)" class="bg-neutral">
-      <audio #myMedia #vgHls="vgHls" [vgMedia]="$any(myMedia)" controls [vgHls]="this._preview" *ngIf="this._preview" crossorigin>
+      <audio controls src="{{this._preview}}" *ngIf="this._preview" crossorigin>
       </audio>
-    </vg-player>
 
 
 </div>

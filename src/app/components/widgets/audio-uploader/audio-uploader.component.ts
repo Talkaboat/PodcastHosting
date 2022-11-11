@@ -12,7 +12,6 @@ import { TranslateService } from 'src/app/services/i18n/translate.service';
 export class AudioUploaderComponent implements OnInit {
   selectedFile?: File;
   selectedFileName: string = '';
-  data: any;
   progressInfos: any[] = [];
   message: string[] = [];
   _preview: string = '';
@@ -32,10 +31,6 @@ export class AudioUploaderComponent implements OnInit {
   constructor(private readonly translate: TranslateService, private readonly toastr: ToastrService, private readonly ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {}
-
-  videoPlayerInit(data: any) {
-    this.data = data;
-  }
 
   selectFile(event: any): void {
     this.message = [];

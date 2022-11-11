@@ -43,8 +43,7 @@ const materialModules = [
     VgCoreModule,
     VgControlsModule,
     VgBufferingModule,
-    VgOverlayPlayModule,
-    VgStreamingModule,
+    VgOverlayPlayModule
 
   ],
   exports: [
