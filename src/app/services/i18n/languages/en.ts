@@ -70,6 +70,7 @@ export const en = {
 
   //#region Episode
   selectedAudio: 'Selected Audio-File',
+  createEpisode: 'Create episode',
   successfullyUpdatedEpisode: 'Episode successfully updated',
   successfullyCreatedEpisode: 'Episode successfully created',
   audioFileNotFoundInfo:

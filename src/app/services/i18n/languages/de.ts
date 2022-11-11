@@ -71,6 +71,7 @@ export const de = {
 
   //#region Episodes
   selectedAudio: 'Ausgewählter Audio-File',
+  createEpisode: 'Episode erstellen',
   audioSizeTooLarge: 'Die Audio-Datei darf eine maximale größe von 1gb haben!',
   successfullyUpdatedEpisode: 'Episode erfolgreich aktualisiert',
   successfullyCreatedEpisode: 'Episode erfolgreich erstellt',
