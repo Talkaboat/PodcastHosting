@@ -49,6 +49,14 @@ export const en = {
     'The data entered is invalid. Please check your entries to make sure that all necessary information is available',
   //#endregion
 
+  //#region Podcast Statistic
+  statistic: 'Statistic',
+  aggregationTime: 'Aggregated Time',
+  totalSeconds: 'Total Seconds',
+  date: 'Date',
+  bookmarks: 'Bookmarks',
+  //#endregion
+
   //#region Backend Error Types
   too_many_podcasts:
     'You already have the maximum number of podcasts. For more podcasts, contact talk@aboat-entertainment.com',

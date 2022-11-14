@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '../../services/i18n/translate.service';
 import { PodcastService } from 'src/app/services/podcast/podcast.service';
 import { WebsiteStateService } from '../../services/website-state/website-state.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-edit-podcast',
@@ -64,7 +65,7 @@ export class EditPodcastComponent implements OnInit, OnDestroy {
     private readonly toastr: ToastrService,
     private readonly translate: TranslateService,
     private readonly router: Router,
-    private readonly websiteState: WebsiteStateService
+    private readonly websiteState: WebsiteStateService, private readonly titleService: Title
   ) {}
 
   ngOnDestroy(): void {
@@ -84,6 +85,7 @@ export class EditPodcastComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Talkaboat Hosting - Manage')
     this.podcastService.getGenres().subscribe((genres: Genre[]) => {
       this.genreList = genres;
       this.fillGenreModels();
@@ -92,6 +94,7 @@ export class EditPodcastComponent implements OnInit, OnDestroy {
       this.route.params.subscribe((params) => {
         const id = +params['id'];
         this.podcastService.getPodcast(id).subscribe((podcast: Podcast) => {
+          this.titleService.setTitle('Talkaboat Hosting - Manage ' + podcast.title);
           this.podcast = podcast;
           this.preview = this.podcast.image;
           this.fillGenreModels();
@@ -129,6 +132,7 @@ export class EditPodcastComponent implements OnInit, OnDestroy {
       .getPodcast(this.podcast.podcastId, true)
       .subscribe((podcast: Podcast) => {
         this.podcast = podcast;
+        this.titleService.setTitle('Talkaboat Hosting - Manage ' + podcast.title);
         this.fillGenreModels();
         this.selectedImage = undefined;
         this.changedImage = false;
@@ -162,6 +166,7 @@ export class EditPodcastComponent implements OnInit, OnDestroy {
     this.podcastService.updatePodcast(this.podcast).subscribe({
       next: (response: Podcast) => {
         this.podcast = response;
+        this.titleService.setTitle('Talkaboat Hosting - Manage ' + this.podcast.title);
         this.toastr.success(this.translate.transform('podcastUpdateSuccess'));
         this.fillGenreModels();
         this.loader.hide();

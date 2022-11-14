@@ -2,6 +2,7 @@
   <app-back-navigation></app-back-navigation>
 
   <ng-container *ngIf="podcast && podcast.podcastId !== -1">
+    <h2>{{ podcast.title }}</h2>
     <mat-tab-group mat-align-tabs="center">
       <mat-tab [label]="'Podcast'">
         <div class="card card-body bg-neutral">
@@ -92,6 +93,14 @@
           <app-episode-list [podcastId]="podcast.podcastId">
 
           </app-episode-list>
+        </ng-template>
+
+      </mat-tab>
+      <mat-tab [label]="'statistic' | translate">
+        <ng-template matTabContent>
+          <app-podcast-statistic [podcastId]="podcast.podcastId">
+
+          </app-podcast-statistic>
         </ng-template>
 
       </mat-tab>

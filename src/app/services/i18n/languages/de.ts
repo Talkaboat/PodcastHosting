@@ -49,6 +49,14 @@ export const de = {
     'Die eingegebenen Daten sind ungültig. Bitte prüfe deine Eingaben um sicherzugehen, dass alle Notwendigen Informationen vorhanden sind',
   //#endregion
 
+  //#region Podcast Statistic
+  statistic: 'Statistik',
+  aggregationTime: 'Aggregierte Zeit',
+  totalSeconds: 'Sekunden Gesamt',
+  date: 'Datum',
+  bookmarks: 'Gemerkt',
+  //#endregion
+
   //#region Backend Error Types
   too_many_podcasts:
     'Du besitzt bereits die maximale Anzahl an Podcasts. Für weitere Podcasts wende dich an talk@aboat-entertainment.com',

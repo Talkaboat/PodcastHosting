@@ -165,3 +165,9 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
     @apply bg-error;
   }
 }
+
+.ngx-charts {
+  text {
+    fill: whitesmoke;
+  }
+}

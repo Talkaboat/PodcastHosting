@@ -1,0 +1,25 @@
+<div class="flex w-full card bg-neutral card-body" *ngIf="statistic">
+  <p>{{ "bookmarks" | translate }}: {{ statistic.bookmarks }}</p>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'aggregationTime' | translate}}</mat-label>
+    <mat-select [(value)]="aggregation" (selectionChange)="changeAggregationTime()">
+      <mat-option *ngFor="let item of aggregations; let i=index" [value]="item.value">
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="h-96">
+    <ngx-charts-bar-vertical
+      [results]="data"
+      [gradient]="true"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="xAxisLabel | translate"
+      [yAxisLabel]="yAxisLabel | translate"
+      [yAxis]="true"
+      [xAxis]="true"
+      [showGridLines]="false"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+</div>

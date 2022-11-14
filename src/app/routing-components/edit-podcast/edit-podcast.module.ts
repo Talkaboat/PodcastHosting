@@ -17,13 +17,16 @@ import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { RouterModule } from '@angular/router';
-
+import { PodcastStatisticComponent } from './podcast-statistic/podcast-statistic.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxChartsModule }from '@swimlane/ngx-charts';
 
 
 @NgModule({
   declarations: [
     EditPodcastComponent,
-    EpisodeListComponent
+    EpisodeListComponent,
+    PodcastStatisticComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +43,8 @@ import { RouterModule } from '@angular/router';
     MatPaginatorModule,
     MatSortModule,
     PipeModule,
-    RouterModule
+    RouterModule,
+    NgxChartsModule
   ]
 })
 export class EditPodcastModule { }
