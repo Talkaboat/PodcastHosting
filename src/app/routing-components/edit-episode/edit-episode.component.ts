@@ -24,6 +24,7 @@ export class EditEpisodeComponent implements OnInit {
   changedAudio = false;
   uploadSub?: Subscription;
   uploadProgress: number = 0;
+  duration: number = 0;
   episode: Episode = {
     title: '',
     description: '',
@@ -86,6 +87,11 @@ export class EditEpisodeComponent implements OnInit {
     );
   }
 
+  receiveDuration(duration: number) {
+    this.episode.audioLengthInSeconds = duration;
+    this.duration = duration;
+  }
+
   getEpisode(episodeId: number, refresh: boolean = false) {
     this.episodeService.getEpisode(episodeId, refresh).subscribe({
       next: (episode: Episode) => {
@@ -136,7 +142,7 @@ export class EditEpisodeComponent implements OnInit {
       this.completedUpdate();
       return;
     }
-    this.podcastRepository.uploadEpisode(this.episode.podcastId, this.episode.episodeId, this.selectedEpisode!).subscribe({ next: (event: any) => {
+    this.podcastRepository.uploadEpisode(this.episode.podcastId, this.episode.episodeId, this.selectedEpisode!, this.duration).subscribe({ next: (event: any) => {
       if (event.type == HttpEventType.UploadProgress && event.total) {
         this.uploadProgress = Math.round(100 * (event.loaded / event.total));
         if(this.uploadProgress == 100) {

@@ -106,7 +106,7 @@ export class PodcastRepositoryService extends RepositoryService {
     return this.upload(api, image);
   }
 
-  uploadEpisode(podcastId: number, episodeId: number, audio: File) {
+  uploadEpisode(podcastId: number, episodeId: number, audio: File, duration: number) {
     const api =
     MEDIA_API.URL +
     MEDIA_API.UPLOAD_EPISODE.replace(
@@ -115,7 +115,7 @@ export class PodcastRepositoryService extends RepositoryService {
     ).replace(
       '{episodeId}',
       episodeId.toString()
-    );
+    ).replace('{duration}', duration.toString());
   return this.upload(api, audio);
   }
 

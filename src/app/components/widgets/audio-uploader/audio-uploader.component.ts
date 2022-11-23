@@ -26,11 +26,16 @@ export class AudioUploaderComponent implements OnInit {
     }
   }
   @Output() onSelectFile: EventEmitter<File> = new EventEmitter<File>();
+  @Output() onDurationReceived: EventEmitter<number> = new EventEmitter<number>();
   imageInfo?: Observable<any>;
 
   constructor(private readonly translate: TranslateService, private readonly toastr: ToastrService, private readonly ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {}
+
+  setDuration(meta: any): void {
+    this.onDurationReceived.emit(Math.round(meta.currentTarget.duration));
+  }
 
   selectFile(event: any): void {
     this.message = [];

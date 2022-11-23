@@ -46,7 +46,7 @@
             cdkAutosizeMaxRows="10"
           ></textarea>
         </mat-form-field>
-        <app-audio-uploader (onSelectFile)="onEpisodeSelected($event)"></app-audio-uploader>
+        <app-audio-uploader (onSelectFile)="onEpisodeSelected($event)" (onDurationReceived)="receiveDuration($event)"></app-audio-uploader>
         <hr class="border-primary mb-5">
         <div class="flex justify-end">
         <button mat-raised-button (click)="createEpisode()" class="btn btn-primary normal-case w-[10rem]">{{ 'createEpisode' | translate }}</button>

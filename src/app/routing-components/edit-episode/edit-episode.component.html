@@ -54,7 +54,7 @@
         </mat-form-field>
         <app-audio-uploader
         [preview]="episode.audio"
-          (onSelectFile)="onEpisodeSelected($event)"
+          (onSelectFile)="onEpisodeSelected($event)" (onDurationReceived)="receiveDuration($event)"
         ></app-audio-uploader>
         <p>{{ 'audioFileNotFoundInfo' | translate }}</p>
         <hr class="border-primary mb-5" />

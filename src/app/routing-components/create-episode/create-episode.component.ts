@@ -23,6 +23,7 @@ export class CreateEpisodeComponent implements OnInit {
   uploadStep = 0;
   uploadSub?: Subscription;
   uploadProgress: number = 0;
+  duration = 0;
   episode: CreateEpisodeDto = {
     title: '',
     description: '',
@@ -80,6 +81,10 @@ export class CreateEpisodeComponent implements OnInit {
     );
   }
 
+  receiveDuration(duration: number) {
+    this.duration = duration;
+  }
+
   createEpisode() {
     console.log(this.modalForm.invalid);
     console.log(this.selectedEpisode ? true : false);
@@ -111,7 +116,7 @@ export class CreateEpisodeComponent implements OnInit {
 
   uploadEpisode(createdEpisode: Episode) {
     this.uploadStep++;
-    this.podcastRepository.uploadEpisode(createdEpisode.podcastId, createdEpisode.episodeId, this.selectedEpisode!).subscribe({ next: (event: any) => {
+    this.podcastRepository.uploadEpisode(createdEpisode.podcastId, createdEpisode.episodeId, this.selectedEpisode!, this.duration).subscribe({ next: (event: any) => {
       if (event.type == HttpEventType.UploadProgress && event.total) {
         this.uploadProgress = Math.round(100 * (event.loaded / event.total));
         if(this.uploadProgress == 100) {

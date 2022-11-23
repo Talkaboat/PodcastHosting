@@ -30,7 +30,7 @@ accept="audio/*, video/*"
     <div class="my-auto">
       <button (click)="fileInput.click()"><mat-icon>file_upload</mat-icon></button>
     </div>
-      <audio controls src="{{this._preview}}" *ngIf="this._preview" crossorigin>
+      <audio controls src="{{this._preview}}" *ngIf="this._preview" crossorigin (loadedmetadata)="setDuration($event)">
       </audio>
 
 
