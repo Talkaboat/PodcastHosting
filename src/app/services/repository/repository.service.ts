@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class RepositoryService {
   protected static readonly repository_prod = "https://api.talkaboat.online/";
-  protected static readonly repository_dev = "https://localhost:5001/";
-  protected readonly use_dev_repository = false;
-  protected static readonly version = "v1/";
+  protected static readonly repository_dev = "https://localhost:7013/";
+  protected readonly use_dev_repository = true;
+  protected static readonly version = "";
   protected jsonHeaders = new HttpHeaders()
     .set('Content-Type', 'application/json')
     .set('Access-Control-Allow-Origin', ['*', 'https://localhost:4200', 'https://app.aboat-entertainment.com', 'http://localhost:4200']);

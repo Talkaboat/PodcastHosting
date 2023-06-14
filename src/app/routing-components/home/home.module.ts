@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { MatButtonModule } from '@angular/material/button';
 import { PipeModule } from '../../pipes/pipe.module';
 import { RouterModule } from '@angular/router';
+import { WidgetsModule } from 'src/app/components/widgets/widgets.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
     HomeRoutingModule,
     MatButtonModule,
     PipeModule,
-    RouterModule
+    RouterModule,
+    WidgetsModule
   ]
 })
 export class HomeModule { }

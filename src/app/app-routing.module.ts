@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/auth/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'sign-in',
     loadChildren: () =>
@@ -15,7 +15,15 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () =>
       import('./routing-components/home/home.module').then((m) => m.HomeModule),
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
+  },
+  {
+    path: 'wallet/:address',
+    loadChildren: () =>
+      import('./routing-components/wallet-watcher/wallet-watcher.module').then(
+        (m) => m.WalletWatcherModule
+      ),
+    //canActivate: [AuthGuard],
   },
   {
     path: 'create',
@@ -41,6 +49,7 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
+
   { path: 'create/:id/episode', loadChildren: () => import('./routing-components/create-episode/create-episode.module').then(m => m.CreateEpisodeModule) },
   { path: 'manage/:id/episode/:episodeId', loadChildren: () => import('./routing-components/edit-episode/edit-episode.module').then(m => m.EditEpisodeModule) },
 ];

@@ -18,6 +18,10 @@ import { VgControlsModule } from '@videogular/ngx-videogular/controls';
 import { VgCoreModule } from '@videogular/ngx-videogular/core';
 import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { VgStreamingModule } from '@videogular/ngx-videogular/streaming';
+import { RecentTradeListComponent } from './recent-trade-list/recent-trade-list.component';
+import { MatTableModule } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
+import { WalletBalanceComponent } from './wallet-balance/wallet-balance.component';
 
 const materialModules = [
   MatCardModule,
@@ -28,13 +32,16 @@ const materialModules = [
   MatProgressBarModule,
   MatListModule,
   MatIconModule,
+  MatTableModule
 ];
 
 @NgModule({
   declarations: [
     BackNavigationComponent,
     ImageUploaderComponent,
-    AudioUploaderComponent
+    AudioUploaderComponent,
+    RecentTradeListComponent,
+    WalletBalanceComponent
   ],
   imports: [
     CommonModule,
@@ -43,13 +50,16 @@ const materialModules = [
     VgCoreModule,
     VgControlsModule,
     VgBufferingModule,
-    VgOverlayPlayModule
+    VgOverlayPlayModule,
+    RouterModule
 
   ],
   exports: [
     BackNavigationComponent,
     ImageUploaderComponent,
     AudioUploaderComponent,
+    RecentTradeListComponent,
+    WalletBalanceComponent
   ]
 })
 export class WidgetsModule { }
