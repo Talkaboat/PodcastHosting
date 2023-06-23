@@ -26,4 +26,11 @@ export class MathUtils {
     var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
     return time;
   }
+
+  public static calculateUnrealizedProfit(tokenAmountInitial: number, pricePaid: number, priceNow: number, tokensSold: number, averageSellPrice: number): number{
+    var initialPrice = tokenAmountInitial * pricePaid;
+    var averageSoldPrice = tokensSold * averageSellPrice;
+    var remainingSellPrice = tokenAmountInitial - tokensSold * priceNow;
+    return remainingSellPrice / (initialPrice - averageSoldPrice) * 100 - 100;
+  }
 }

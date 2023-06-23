@@ -8,8 +8,24 @@
   </div>
 
   <ng-template #foundAddress>
-    <div class="grid grid-cols-1 gap-1" *ngIf="wallet">
-      <button class="cursor-pointer" *ngFor="let token of wallet.tokens" (click)="toggleActiveToken(token)">
+    <div *ngIf="wallet" class="mb-5">
+      <h4 class="!mb-1">Performance</h4>
+      <div class="grid grid-cols-2 gap-3">
+        <div>Overall Profit: {{ wallet.profitPerformance | number }}%</div>
+        <div>Trades: {{ wallet.trades }}</div>
+      </div>
+    </div>
+
+    <div class="flex justify-between mb-2">
+      <p>Total tokens in wallet: {{total}}</p>
+      <div class="flex gap-3">
+        <button [disabled]="currentOffset == 0" class="btn btn-sm" (click)="previousPage()"><mat-icon>keyboard_arrow_left</mat-icon></button>
+        <span class="my-auto cursor-none select-none">{{currentOffset / amountPerPage + 1}}</span>
+        <button [disabled]="currentOffset >= total"  class="btn btn-sm"  (click)="nextPage()"><mat-icon>keyboard_arrow_right</mat-icon></button>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-2" *ngIf="wallet">
+      <button class="cursor-pointer" *ngFor="let token of selectedTokens" (click)="toggleActiveToken(token)">
         <mat-card class="bg-base-300 hover:bg-base-100 text-base-content">
           <div class="flex gap-4 w-full">
             <div class="my-auto">
@@ -25,8 +41,8 @@
                 </div>
                 <img class="max-h-6" src="https://bscscan.com/images/svg/brands/bnb.svg?v=1.3" />
               </div>
-              <div class="flex justify-between ml-8">
-                {{token.balance}}
+              <div class="flex gap-1 ml-8">
+                {{token.balance | number:"1.0-6"}} <span class="text-xs mt-0.5" *ngIf="token.price != 0"><i>(${{ token.balance * token.price | number}})</i></span>
               </div>
             </div>
 

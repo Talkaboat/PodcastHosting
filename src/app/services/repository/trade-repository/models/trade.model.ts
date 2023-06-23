@@ -1,8 +1,9 @@
 import { TokenModel } from "../../token-repository/models/token.dto";
+import { PlattformModel } from "./plattform.model";
 
 export interface TradeModel {
   trader: string;
-  plattform: string;
+  plattform: PlattformModel;
   tokenIn: string;
   tokenOut: string;
   tokenInAmount: number;
@@ -10,8 +11,12 @@ export interface TradeModel {
   chainId: number;
   txHash: string;
   profit: number;
+  averageSellprice: number;
+  tokensSold: number;
+  tokenInPrice: number;
+  tokenOutPrice: number;
   sell?: TradeModel;
-  tokenInModel?: TokenModel
-  tokenOutModel?: TokenModel
+  tokenInData?: TokenModel
+  tokenOutData?: TokenModel
   timestamp: Date;
 }

@@ -8,6 +8,9 @@ import { ModalComponent } from './modal/modal.component';
 import { PipeModule } from '../../pipes/pipe.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     PipeModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule
   ],
   exports: [
     HeaderComponent,

@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
   templateUrl: './wallet-watcher.component.html',
-  styleUrls: ['./wallet-watcher.component.scss']
+  styleUrls: ['./wallet-watcher.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WalletWatcherComponent implements OnInit {
   subscriptions: Subscription[] = [];
   walletAddress: string = '';
   constructor(
     private readonly route: ActivatedRoute,
+    private readonly ref: ChangeDetectorRef
   ) {}
 
   ngOnDestroy(): void {
@@ -22,7 +24,7 @@ export class WalletWatcherComponent implements OnInit {
     this.subscriptions.push(
       this.route.params.subscribe((params: any) => {
         this.walletAddress = params['address'];
-        console.log(this.walletAddress);
+        this.ref.detectChanges();
       })
     );
   }

@@ -1,35 +1,41 @@
-<section tabindex="0" *ngIf="tradeHistory && tradeHistory.trades">
-  <mat-card class="bg-base-300 border-primary border-2 text-primary max-w-lg mx-auto px-2 cursor-pointer hover:bg-base-100" *ngFor="let trade of tradeHistory.trades">
-      <mat-card-title-group class="w-full">
-        <mat-card-title class="text-sm !mb-0" *ngIf="!wallet"><a [routerLink]="['/wallet', trade.trader]" class="hover:text-primary-focus">{{ trade.trader }}</a></mat-card-title>
-        <mat-card-subtitle class="text-white text-xs !mb-2">{{trade.timestamp | date:'dd MMM yyyy HH:mm'}}</mat-card-subtitle>
-        <img class="max-h-8" src="https://bscscan.com/images/svg/brands/bnb.svg?v=1.3" >
-      </mat-card-title-group>
-    <mat-card-content class="text-white">
-      <div class="grid grid-cols-5">
-        <div class="col-span-2 text-left">
-          {{ trade.tokenInModel ? trade.tokenInModel.symbol : trade.tokenIn }}
-        </div>
-        <div class="text-center">
+<section tabindex="0">
+  <div class="grid gap-2 " [class.md:grid-cols-2]="wallet" *ngIf="tradeHistory && tradeHistory.trades">
+    <mat-card class="w-full bg-base-300 border-primary border-2 text-primary mx-auto px-2 cursor-pointer hover:bg-base-100" *ngFor="let trade of tradeHistory.trades">
+        <mat-card-title-group class="w-full">
+          <mat-card-title class="text-sm !mb-0" *ngIf="!wallet"><a [routerLink]="['/wallet', trade.trader]" class="hover:text-primary-focus">{{ trade.trader }}</a></mat-card-title>
+          <mat-card-subtitle class="text-white text-xs !mb-2">{{trade.timestamp | date:'dd MMM yyyy HH:mm'}}</mat-card-subtitle>
+          <img class="max-h-8" src="https://bscscan.com/images/svg/brands/bnb.svg?v=1.3" >
+        </mat-card-title-group>
+      <mat-card-content class="text-white">
+        <div class="grid grid-cols-5">
+          <div class="col-span-2 text-left">
+            {{ trade.tokenInData ? trade.tokenInData.symbol : trade.tokenIn }}
+          </div>
+          <div class="text-center">
 
-          <mat-icon>keyboard_arrow_right</mat-icon>
-        </div>
-        <div class="col-span-2 text-right">
-          {{ trade.tokenOutModel ? trade.tokenOutModel.symbol : trade.tokenOut }}
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </div>
+          <div class="col-span-2 text-right">
+            {{ trade.tokenOutData ? trade.tokenOutData.symbol : trade.tokenOut }}
 
+          </div>
         </div>
+        <div class="grid grid-cols-2 text-xs text-gray-400 -mt-2">
+          <div class="text-left">
+            {{ trade.tokenInAmount | number:'1.0-6'}}
+          </div>
+          <div class="text-right text-xs ">
+            {{ trade.tokenOutAmount | number:'1.0-6'}}
+          </div>
+        </div>
+      </mat-card-content>
+      <div class="w-full flex justify-between">
+        <div class="text-xs">
+          <div [class.text-gray-400]="trade.profit == 0" [class.text-success]="trade.profit > 0" [class.text-error]="trade.profit < 0">Profit: {{ trade.profit }}%</div>
+          <!-- <div>Test</div> -->
+        </div>
+        <button disabled class="btn my-auto btn-success btn-sm">Copy</button>
       </div>
-      <div class="grid grid-cols-2 text-xs text-gray-400 -mt-2">
-        <div class="text-left">
-          {{ trade.tokenInAmount | number:'1.0-6'}}
-        </div>
-        <div class="text-right text-xs ">
-          {{ trade.tokenOutAmount | number:'1.0-6'}}
-        </div>
-      </div>
-    </mat-card-content>
-    <div class="w-fit ml-auto">
-      <button class="btn btn-success btn-sm">Copy</button>
-    </div>
-  </mat-card>
+    </mat-card>
+  </div>
 </section>
