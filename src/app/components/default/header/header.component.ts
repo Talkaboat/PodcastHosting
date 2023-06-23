@@ -20,7 +20,6 @@ export class HeaderComponent implements OnInit {
   }
 
   searchWallet(event: any) {
-    console.log(event.value);
     this.router.navigate(['/wallet', event.value]);
   }
 

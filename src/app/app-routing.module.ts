@@ -4,13 +4,13 @@ import { AuthGuard } from './services/auth/auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  {
-    path: 'sign-in',
-    loadChildren: () =>
-      import('./routing-components/signin/signin.module').then(
-        (m) => m.SigninModule
-      ),
-  },
+  // {
+  //   path: 'sign-in',
+  //   loadChildren: () =>
+  //     import('./routing-components/signin/signin.module').then(
+  //       (m) => m.SigninModule
+  //     ),
+  // },
   {
     path: 'home',
     loadChildren: () =>

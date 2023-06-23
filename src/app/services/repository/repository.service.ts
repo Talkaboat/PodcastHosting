@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RepositoryService {
-  protected static readonly repository_prod = "https://api.talkaboat.online/";
+  protected static readonly repository_prod = "https://cryptoflow-autotrading.azurewebsites.net/";
   protected static readonly repository_dev = "https://localhost:7013/";
-  protected readonly use_dev_repository = true;
+  protected readonly use_dev_repository = false;
   protected static readonly version = "";
   protected jsonHeaders = new HttpHeaders()
     .set('Content-Type', 'application/json')

@@ -22,6 +22,7 @@ import { RecentTradeListComponent } from './recent-trade-list/recent-trade-list.
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { WalletBalanceComponent } from './wallet-balance/wallet-balance.component';
+import { TraderPerformanceWidgetComponent } from './trader-performance-widget/trader-performance-widget.component';
 
 const materialModules = [
   MatCardModule,
@@ -41,7 +42,8 @@ const materialModules = [
     ImageUploaderComponent,
     AudioUploaderComponent,
     RecentTradeListComponent,
-    WalletBalanceComponent
+    WalletBalanceComponent,
+    TraderPerformanceWidgetComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +61,8 @@ const materialModules = [
     ImageUploaderComponent,
     AudioUploaderComponent,
     RecentTradeListComponent,
-    WalletBalanceComponent
+    WalletBalanceComponent,
+    TraderPerformanceWidgetComponent
   ]
 })
 export class WidgetsModule { }

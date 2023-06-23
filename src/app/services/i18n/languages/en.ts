@@ -21,9 +21,8 @@ export const en = {
   //#endregion
 
   //#region Home
-  homeEntryTitle: 'What do you want to do?',
-  createNewPodcast: 'Create a new podcast',
-  manageYourPodcasts: 'Manage your podcasts',
+  homeEntryTitle: 'Decentralized Copy Trading & Trade performance tracking',
+  homeEntryText: 'This is a minimum viable product version of the Cryptoflow Autotrader and only demonstrates the Real-Time Trade Watching and Performance Tracking. We will actively improve the existing features while we develop the core solution for tracking, notifying and copy trading (manually & automatically).',
   //#endregion
 
   //#region Create Podcast

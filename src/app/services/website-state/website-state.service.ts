@@ -25,7 +25,7 @@ export class WebsiteStateService {
         loaderService.hide();
         let page = this.formatUrl(ev.urlAfterRedirects);
         page = page ? page : 'Home';
-        this.titleService.setTitle('Talkaboat Hosting - ' + page);
+        this.titleService.setTitle('Cryptoflow - ' + page);
         if(ev.urlAfterRedirects.includes('sign-in')) {
           return;
         }
