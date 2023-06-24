@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { TraderModel } from 'src/app/services/repository/trade-repository/models/trader.model';
 import { TradeRepositoryService } from 'src/app/services/repository/trade-repository/trade-repository.service';
 
 @Component({
@@ -9,11 +10,16 @@ import { TradeRepositoryService } from 'src/app/services/repository/trade-reposi
 })
 export class TraderPerformanceWidgetComponent implements OnInit {
 
-  constructor(private readonly tradeRepository: TradeRepositoryService) { }
+  traders: TraderModel[] = [];
+  constructor(
+    private readonly tradeRepository: TradeRepositoryService,
+    private readonly ref: ChangeDetectorRef
+    ) { }
 
   ngOnInit(): void {
     this.tradeRepository.getBestPerformingTraders(undefined, undefined, 3).subscribe(result => {
-      console.log(result);
+      this.traders = result;
+      this.ref.detectChanges();
     })
   }
 

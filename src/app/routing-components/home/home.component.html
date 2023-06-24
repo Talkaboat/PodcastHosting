@@ -1,7 +1,10 @@
-<div class="max-w-lg mx-auto px-5 pb-5">
+<div class="max-w-2xl mx-auto px-5 pb-5">
   <h2>{{ "homeEntryTitle" | translate }}</h2>
   <p class="mb-3 text-base-content">{{ "homeEntryText" | translate }}</p>
-  <app-trader-performance-widget></app-trader-performance-widget>
+  <div class="mb-5">
+
+    <app-trader-performance-widget></app-trader-performance-widget>
+  </div>
   <app-recent-trade-list></app-recent-trade-list>
   <!-- <a routerLink="/create">
     <button mat-raised-button class="btn btn-primary w-full h-20 normal-case">

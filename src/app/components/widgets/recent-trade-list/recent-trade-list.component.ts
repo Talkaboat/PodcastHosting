@@ -17,6 +17,8 @@ import { TokenService } from 'src/app/services/token-service/token.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecentTradeListComponent implements OnInit {
+  currentOffset = 0;
+  amountPerPage = 4;
   _address: string = '';
   _wallet: string = '';
   get address() {
@@ -52,7 +54,7 @@ export class RecentTradeListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.interval = interval(2000).subscribe(() => {
+    this.interval = interval(3000).subscribe(() => {
       this.getRecentTrades();
     });
   }
@@ -61,23 +63,36 @@ export class RecentTradeListComponent implements OnInit {
     this.interval?.unsubscribe();
   }
 
+
+  nextPage() {
+    if(!this.tradeHistory || !this.tradeHistory!.trades || this.tradeHistory.total <= this.currentOffset + this.amountPerPage) return;
+    this.currentOffset = this.currentOffset + this.amountPerPage;
+    this.getRecentTrades();
+  }
+
+  previousPage() {
+    if(!this.tradeHistory || !this.tradeHistory!.trades || this.currentOffset <= 0) return;
+    this.currentOffset = Math.max(0, this.currentOffset - this.amountPerPage);
+    this.getRecentTrades();
+  }
+
   getRecentTrades() {
     this.tradeRepository
-      .getRecentTrades(this.wallet, this.address, 0, 3)
+      .getRecentTrades(this.wallet, this.address, this.currentOffset, this.amountPerPage)
       .subscribe((result) => {
         var isNew =
           false ||
           this.tradeHistory == undefined ||
           this.tradeHistory.trades.length == 0;
-        this.tradeHistory?.trades.forEach((element) => {
-          if (
-            result.trades.filter(
-              (t) => t.txHash != element.txHash && t.chainId == element.chainId
-            )?.length > 0
-          ) {
-            isNew = true;
+          if(!isNew) {
+            for(var i = 0; i < result.trades.length; i++) {
+              var trade1 = this.tradeHistory?.trades.at(i);
+              var trade2 = result.trades.at(i);
+              if(trade1?.txHash != trade2?.txHash || trade1?.chainId != trade2?.chainId) {
+                isNew = true;
+              }
+            }
           }
-        });
         if (isNew) {
           this.tradeHistory = result;
           this.ref.detectChanges();

@@ -1,1 +1,21 @@
-<p>trader-performance-widget works!</p>
+<div *ngIf="traders && traders.length > 0">
+  <h3>Best performing traders</h3>
+  <div class="grid grid-cols-3 gap-2">
+    <a [routerLink]="['/wallet', trader.address]"  *ngFor="let trader of traders">
+      <mat-card class="bg-base-300 text-base-content hover:text-base-300 hover:bg-base-content">
+        <mat-card-content>
+          <p>
+            {{ trader.address.substr(0,9) }}...
+          </p>
+          <p>
+            Overall Profit: {{ trader.profit | number }}%
+          </p>
+
+          <p>
+            Trades: {{ trader.trades }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </a>
+  </div>
+</div>

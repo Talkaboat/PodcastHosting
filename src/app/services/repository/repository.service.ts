@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class RepositoryService {
   protected static readonly repository_prod = "https://cryptoflow-autotrading.azurewebsites.net/";
   protected static readonly repository_dev = "https://localhost:7013/";
-  protected readonly use_dev_repository = false;
+  protected readonly use_dev_repository = true;
   protected static readonly version = "";
   protected jsonHeaders = new HttpHeaders()
     .set('Content-Type', 'application/json')
